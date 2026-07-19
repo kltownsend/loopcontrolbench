@@ -101,14 +101,38 @@ The sandboxed path needs `git`, `gh`, `docker`, and network. Each task clones on
 
 **Claude Code skills.** `.claude/skills/` ships two skills for anyone driving this with Claude Code: `loopcontrolbench-run` (score a model behind the gate and report the number honestly) and `loopcontrolbench-grow` (mine PRs, certify each in the container, admit or drop-and-document). They encode the same discipline this README describes.
 
+## Running local and reasoning models
+
+The worker talks to any OpenAI-compatible endpoint. Point it wherever with `MODEL`, `OPENAI_BASE_URL`, and `OPENAI_API_KEY`. Two env-gated paths add reasoning ("thinking"), off by default so the plain OpenAI path is unchanged:
+
+| env | effect |
+|---|---|
+| `OLLAMA_THINK=1` | Drive a local **Ollama** model with thinking on (`OLLAMA_HOST`, default `http://localhost:11434`). |
+| `VLLM_THINK=1` | Drive an OpenAI-compatible server (e.g. **vLLM**) with `enable_thinking` on. |
+| `NUM_PREDICT` | Reasoning + answer token budget (default 8192). |
+| `OLLAMA_NUM_CTX` | Context window for Ollama (default 32768); raise it for large source files. |
+| `PAR` | Task concurrency in `bench.sh` (default 6); lower it for a memory-heavy local model, raise it to exploit server-side batching. |
+| `TASK_TIMEOUT` | Per-task wall-clock cap in seconds (default 600); raise it for slow local reasoning. |
+
+**Mind the budget.** A reasoning model can spend the entire `NUM_PREDICT` budget thinking and never emit the answer, which scores as `invalid_edit` (no applicable edit). If solves collapse, the budget is likely too small: raise `NUM_PREDICT` until the answer has room after the thinking. Reasoning, not temperature, is the lever this harness measures.
+
+```bash
+# local Ollama, reasoning on, generous budget
+MODEL=gemma4:26b OLLAMA_THINK=1 NUM_PREDICT=16384 OLLAMA_NUM_CTX=40960 PAR=2 ./tools/bench.sh
+
+# a vLLM endpoint, reasoning on
+MODEL=my-model OPENAI_BASE_URL=http://host:8000/v1 OPENAI_API_KEY=x \
+  VLLM_THINK=1 NUM_PREDICT=16384 PAR=8 TASK_TIMEOUT=1800 ./tools/bench.sh
+```
+
 ## Outcomes and the denominator
 
-Each attempted task resolves to exactly one outcome, recorded explicitly in the result record's `outcome` field (`solved | model_miss | invalid_edit | infrastructure_error`) so aggregation and auditing do not have to infer it from the counts:
+Each attempted task resolves to exactly one outcome, recorded explicitly in the result record's `outcome` field (`solved | model_miss | invalid_edit | model_timeout | infrastructure_error`) so aggregation and auditing do not have to infer it from the counts:
 
 - **solved** — the edit applied and every named `fail_to_pass` test now passes.
 - **model miss** — the edit applied cleanly but a target test still fails.
 - **invalid edit** — the model's response could not be parsed as the required edit, its search text did not match the file, or it targeted a non-allowlisted path. Counted as **not solved** (the model produced an unusable response) and it stays in the denominator.
-- **model timeout** — the model did not return a usable response within the solve budget. Counted as **not solved**, in the denominator (it surfaces as `invalid_edit`: no applicable edit was produced). A hanging model does not earn a cleaner denominator than one that returns a bad edit. Distinguishing a genuine timeout from an endpoint/auth failure by exception class is a planned refinement.
+- **model timeout** — the model did not return a usable response within the solve budget. Counted as **not solved**, in the denominator. A hanging model does not earn a cleaner denominator than one that returns a bad edit. The runner records the failing exception class, so a genuine timeout is distinguished from an infrastructure error (auth, outage, bad endpoint).
 - **infrastructure error** — the environment, not the model, failed: the install did not complete, or the model endpoint returned an auth/connection-level error. The install step **fails closed** — required steps run under `set -e` and the caller checks both the container exit code and the completion marker, so a broken install is dropped here, never scored downstream as a model miss.
 - **excluded at certification** — a task that cannot be set up or reproduced in the scoring image is dropped **at the gate, before any model runs**, never mid-score: a clone or install failure, or a test harness that will not collect on modern Python. These are recorded in `tasks/_dropped/` with a reason, so an exclusion is a visible admission decision, not a silent hole in a run. A model's own edit breaking collection is *not* this: because the pool is certified to collect, a collection failure during scoring is counted as a **model miss**, in the denominator. A benchmark-wide service outage is reported separately.
 

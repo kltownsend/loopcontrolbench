@@ -22,7 +22,7 @@ Usage: run_sandboxed.py <path/to/task.json>   |   run_sandboxed.py --teardown
 """
 import subprocess, sys, tempfile, os, json, shutil, time
 sys.path.insert(0, os.path.dirname(__file__))
-from run import build_prompt, call_model, parse_edits, _parse  # host-side, no subprocess
+from run import build_prompt, call_model, parse_edits, _parse, last_error  # host-side, no subprocess
 
 IMAGE = os.environ.get('BENCH_IMAGE', 'loopcontrolbench-base')  # build: docker build -t loopcontrolbench-base tools/
 # work dir must be under a Docker-shared path; ~ is shared on Docker Desktop for macOS.
@@ -149,6 +149,7 @@ def run_task(spec):
                         'outcome': 'infrastructure_error'}); return log
         prompt = build_prompt(spec, rp)                                 # host reads source
         out = call_model(prompt)                                        # host holds the key
+        err = last_error()                                              # None on success
         allowed = set(spec['source_files']); applied, failed, oos = [], [], []
         for path, search, replace in parse_edits(out):
             if path not in allowed:
@@ -171,13 +172,15 @@ def run_task(spec):
         # One explicit outcome per task, so aggregation is not left to interpret the counts.
         if solved:
             outcome = 'solved'
+        elif err:                                                       # the model call itself failed
+            outcome = 'model_timeout' if 'timeout' in err.lower() else 'infrastructure_error'
         elif applied:
             outcome = 'model_miss'                                      # applied an edit, tests still fail
         else:
             outcome = 'invalid_edit'                                    # no applicable edit: empty, unparseable, unmatched, or out-of-scope
         log.update({'solved': solved, 'outcome': outcome, 'edits_applied': len(applied),
                     'edits_failed': len(failed), 'out_of_scope': oos, 'still_failing': still,
-                    'completion_chars': len(out)})
+                    'completion_chars': len(out), 'model_error': err})
         return log
     finally:
         shutil.rmtree(work, ignore_errors=True)

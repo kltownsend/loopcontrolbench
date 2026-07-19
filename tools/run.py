@@ -6,8 +6,14 @@ deterministic validator, not the model, decides done). The worker is model-agnos
 any OpenAI-compatible chat endpoint (OpenAI, vLLM, Ollama) via env:
   MODEL (default gpt-5-mini), OPENAI_BASE_URL (default OpenAI), OPENAI_API_KEY.
 
+Reasoning models (optional, env-gated, off by default so the OpenAI path is unchanged):
+  OLLAMA_THINK=1  -> local Ollama with thinking on (OLLAMA_HOST, OLLAMA_NUM_CTX)
+  VLLM_THINK=1    -> an OpenAI-compatible server (e.g. vLLM) with enable_thinking on
+  NUM_PREDICT     -> reasoning+answer token budget (raise it so thinking does not starve
+                     the answer; a small budget can leave no room for the edit)
+
 Usage: run.py <path/to/task.json>
-Result JSON: {task_id, model, solved (bool), fail_to_pass, still_failing, ...}
+Result JSON: {task_id, model, solved (bool), outcome, fail_to_pass, still_failing, ...}
 """
 import subprocess, sys, tempfile, os, json, shutil, re, ast, glob as _g
 
@@ -15,6 +21,16 @@ PY = os.environ.get('BENCH_PY', 'python3.13')
 MODEL = os.environ.get('MODEL', 'gpt-5-mini')
 BASE_URL = os.environ.get('OPENAI_BASE_URL')  # None => OpenAI default
 API_KEY = os.environ.get('OPENAI_API_KEY', 'x')
+# Optional: drive a local Ollama with reasoning ("thinking") on. Env-gated, so the default
+# OpenAI-compatible path is unchanged. NUM_PREDICT is the reasoning+answer token budget;
+# OLLAMA_NUM_CTX sizes the context window (raise it for large source files).
+OLLAMA_THINK = os.environ.get('OLLAMA_THINK') == '1'
+OLLAMA_HOST = os.environ.get('OLLAMA_HOST', 'http://localhost:11434')
+NUM_PREDICT = int(os.environ.get('NUM_PREDICT', '8192'))
+OLLAMA_NUM_CTX = int(os.environ.get('OLLAMA_NUM_CTX', '32768'))
+# Optional: drive a reasoning model on an OpenAI-compatible server (e.g. vLLM) with thinking
+# on and a token budget. Env-gated, so the plain OpenAI path (gpt-5-mini) is unchanged.
+VLLM_THINK = os.environ.get('VLLM_THINK') == '1'
 
 # Untrusted repo code (setup.py, tests) runs in subprocesses. Strip credentials from
 # their environment so a malicious or careless repo can't read API keys, cloud creds,
@@ -90,18 +106,47 @@ def build_prompt(spec, rp):
               'what is needed to make the failing test(s) pass. Do not modify tests.']
     return '\n'.join(parts)
 
+def _call_ollama_think(prompt):
+    """Local Ollama with thinking on. Returns the final answer (not the thinking trace);
+    the edit blocks live in the answer, which is what parse_edits scans."""
+    import urllib.request
+    body = {'model': MODEL, 'messages': [{'role': 'user', 'content': prompt}], 'stream': False,
+            'think': True, 'options': {'num_predict': NUM_PREDICT, 'num_ctx': OLLAMA_NUM_CTX}}
+    req = urllib.request.Request(OLLAMA_HOST + '/api/chat', data=json.dumps(body).encode(),
+                                 headers={'Content-Type': 'application/json'})
+    with urllib.request.urlopen(req, timeout=1800) as r:
+        return json.load(r).get('message', {}).get('content') or ''
+
+_LAST_ERROR = None
+
+def last_error():
+    """Exception class name from the most recent call_model, or None on success. Lets the
+    runner separate a model timeout (the model's problem) from an infrastructure error such as
+    an auth failure, outage, or bad endpoint (the harness's problem) in the outcome field."""
+    return _LAST_ERROR
+
 def call_model(prompt, timeout=300):
-    from openai import OpenAI
-    kw = {'api_key': API_KEY, 'timeout': timeout}
-    if BASE_URL:
-        kw['base_url'] = BASE_URL
-    client = OpenAI(**kw)
+    global _LAST_ERROR
+    _LAST_ERROR = None
     try:
-        r = client.chat.completions.create(model=MODEL, messages=[{'role': 'user', 'content': prompt}])
+        if OLLAMA_THINK:
+            return _call_ollama_think(prompt)
+        from openai import OpenAI
+        kw = {'api_key': API_KEY, 'timeout': 1800 if VLLM_THINK else timeout}
+        if BASE_URL:
+            kw['base_url'] = BASE_URL
+        client = OpenAI(**kw)
+        params = {'model': MODEL, 'messages': [{'role': 'user', 'content': prompt}]}
+        if VLLM_THINK:  # reasoning on + budget; thinking may be inline in content, which parse_edits scans
+            params['max_tokens'] = NUM_PREDICT
+            params['extra_body'] = {'chat_template_kwargs': {'enable_thinking': True}}
+        r = client.chat.completions.create(**params)
         return r.choices[0].message.content or ''
-    except Exception:
+    except Exception as e:
         # A model timeout or API error yields no edit, so the task scores as a miss
-        # (not solved, still in the denominator), never a crash-exclusion.
+        # (not solved, still in the denominator), never a crash-exclusion. The class name is
+        # recorded so the runner can label the outcome (timeout vs infrastructure error).
+        _LAST_ERROR = type(e).__name__
         return ''
 
 def parse_edits(text):
