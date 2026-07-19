@@ -1,0 +1,17 @@
+{
+  "task_id": "pyjwt-pr1040",
+  "repo": "jpadilla/pyjwt",
+  "base_sha": "ebc941de508f76acaa78defb15197092458f1874",
+  "fix_sha": "9085670a1f69de3e86c7d122317c3b2707e0123b",
+  "source_files": [
+    "jwt/api_jwt.py"
+  ],
+  "test_files": [
+    "tests/test_api_jwt.py"
+  ],
+  "fail_to_pass": [
+    "tests/test_api_jwt.py::TestJWT::test_encode_with_non_str_iss",
+    "tests/test_api_jwt.py::TestJWT::test_validate_iss_with_non_str_issuer"
+  ],
+  "source_pr": 1040
+}

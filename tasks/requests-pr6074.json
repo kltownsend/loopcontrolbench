@@ -1,0 +1,17 @@
+{
+  "task_id": "requests-pr6074",
+  "repo": "psf/requests",
+  "base_sha": "5e749546a26ce62e53d0a14ae1455f8b066fe19f",
+  "fix_sha": "79f60274f7e461b8fd2f579e741f748438d7eadb",
+  "source_files": [
+    "requests/sessions.py"
+  ],
+  "test_files": [
+    "tests/test_requests.py"
+  ],
+  "fail_to_pass": [
+    "tests/test_requests.py::TestRequests::test_env_cert_bundles[env4-True]",
+    "tests/test_requests.py::TestRequests::test_env_cert_bundles[env5-True]"
+  ],
+  "source_pr": 6074
+}

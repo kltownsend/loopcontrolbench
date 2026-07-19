@@ -1,0 +1,16 @@
+{
+  "task_id": "marshmallow-pr2901",
+  "repo": "marshmallow-code/marshmallow",
+  "base_sha": "fea5428567960f15be0c9a3a4b99c0d9bb63848c",
+  "fix_sha": "070dde08bad456e743a0d2e1842c142a799a9568",
+  "source_files": [
+    "src/marshmallow/fields.py"
+  ],
+  "test_files": [
+    "tests/test_deserialization.py"
+  ],
+  "fail_to_pass": [
+    "tests/test_deserialization.py::TestFieldDeserialization::test_constant_with_required"
+  ],
+  "source_pr": 2901
+}

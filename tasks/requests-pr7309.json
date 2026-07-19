@@ -1,0 +1,16 @@
+{
+  "task_id": "requests-pr7309",
+  "repo": "psf/requests",
+  "base_sha": "bc7dd0fc4d56e808bcdd85ac2d797b3107c89259",
+  "fix_sha": "f0198e6dfc431a2293dc16e1b1e8fcddc910a7f3",
+  "source_files": [
+    "src/requests/utils.py"
+  ],
+  "test_files": [
+    "tests/test_utils.py"
+  ],
+  "fail_to_pass": [
+    "tests/test_utils.py::test_get_encoding_from_headers[value3-ISO-8859-1]"
+  ],
+  "source_pr": 7309
+}

@@ -1,0 +1,15 @@
+{
+  "task_id": "task-r055",
+  "repo": "more-itertools/more-itertools",
+  "base_sha": "247e15b3a489",
+  "fix_sha": "edb3346",
+  "source_files": [
+    "more_itertools/more.py"
+  ],
+  "test_files": [
+    "tests/test_more.py"
+  ],
+  "fail_to_pass": [
+    "tests/test_more.py::NumericRangeTests::test_empty_reversed"
+  ]
+}

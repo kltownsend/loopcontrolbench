@@ -1,0 +1,19 @@
+{
+  "task_id": "click-pr3126",
+  "repo": "pallets/click",
+  "base_sha": "c69643b60cf971cd5d8e5d3902632807ceab9b8f",
+  "fix_sha": "19fd4d6e18bc9fce451f92f422696b11169faa57",
+  "source_files": [
+    "src/click/shell_completion.py"
+  ],
+  "test_files": [
+    "tests/test_shell_completion.py"
+  ],
+  "fail_to_pass": [
+    "tests/test_shell_completion.py::test_fish_multiline_help_complete",
+    "tests/test_shell_completion.py::test_full_complete[fish-env4-plain\\na\\n_\\nplain\\nb\\nbee\\n]",
+    "tests/test_shell_completion.py::test_full_complete[fish-env5-plain\\nb\\nbee\\n]",
+    "tests/test_shell_completion.py::test_full_complete[fish-env6-plain\\nb\\nbee\\n]"
+  ],
+  "source_pr": 3126
+}

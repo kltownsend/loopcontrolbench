@@ -1,0 +1,15 @@
+{
+  "task_id": "task-r008",
+  "repo": "jpadilla/pyjwt",
+  "base_sha": "4e15dbd9aaef",
+  "fix_sha": "0a99cc2427c751275ea0002acca9ba0c07c25834",
+  "source_files": [
+    "jwt/api_jwt.py"
+  ],
+  "test_files": [
+    "tests/test_api_jwt.py"
+  ],
+  "fail_to_pass": [
+    "tests/test_api_jwt.py::TestJWT::test_decode_works_if_iat_is_str_of_a_number"
+  ]
+}

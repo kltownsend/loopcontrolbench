@@ -1,0 +1,16 @@
+{
+  "task_id": "prettytable-pr345",
+  "repo": "prettytable/prettytable",
+  "base_sha": "79f5999fd5b90aea0b3324bc6fb99f48f7db5daf",
+  "fix_sha": "cf5b1670e56afc28bcf76142faa3bbcfedcfa85b",
+  "source_files": [
+    "src/prettytable/prettytable.py"
+  ],
+  "test_files": [
+    "tests/test_prettytable.py"
+  ],
+  "fail_to_pass": [
+    "tests/test_prettytable.py::TestMaxTableWidth::test_table_formatted_html_autoindex"
+  ],
+  "source_pr": 345
+}

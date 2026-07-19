@@ -1,0 +1,20 @@
+{
+  "task_id": "more-itertools-pr1117",
+  "repo": "more-itertools/more-itertools",
+  "base_sha": "f2bd64cea7c9a92e4c1fae0be9a1271f6a3fbfb9",
+  "fix_sha": "6b32fbfba127d6b4aaf57d6b254b2ab5fc80ae76",
+  "source_files": [
+    "more_itertools/more.py",
+    "more_itertools/recipes.py"
+  ],
+  "test_files": [
+    "tests/test_more.py",
+    "tests/test_recipes.py"
+  ],
+  "fail_to_pass": [
+    "tests/test_more.py::NthProductTests::test_repeat",
+    "tests/test_more.py::ProductIndexTests::test_repeat",
+    "tests/test_recipes.py::RandomProductTests::test_list_with_repeat"
+  ],
+  "source_pr": 1117
+}

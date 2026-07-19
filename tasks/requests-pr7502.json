@@ -1,0 +1,16 @@
+{
+  "task_id": "requests-pr7502",
+  "repo": "psf/requests",
+  "base_sha": "661970d171d9c3e12e4c789c4768db647d8c4da0",
+  "fix_sha": "6f205ff422bccd5e4c4fc0b64c5f3e7df5181db6",
+  "source_files": [
+    "src/requests/models.py"
+  ],
+  "test_files": [
+    "tests/test_requests.py"
+  ],
+  "fail_to_pass": [
+    "tests/test_requests.py::TestRequests::test_post_named_tempfile"
+  ],
+  "source_pr": 7502
+}

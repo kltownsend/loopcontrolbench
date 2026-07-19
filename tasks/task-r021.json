@@ -1,0 +1,17 @@
+{
+  "task_id": "task-r021",
+  "repo": "prettytable/prettytable",
+  "base_sha": "cf5b1670e56a",
+  "fix_sha": "920cc8d",
+  "source_files": [
+    "src/prettytable/prettytable.py"
+  ],
+  "test_files": [
+    "tests/test_prettytable.py"
+  ],
+  "fail_to_pass": [
+    "tests/test_prettytable.py::TestStyle::test_style_reset[DOUBLE_BORDER]",
+    "tests/test_prettytable.py::TestStyle::test_style_reset[RANDOM]",
+    "tests/test_prettytable.py::TestStyle::test_style_reset[SINGLE_BORDER]"
+  ]
+}

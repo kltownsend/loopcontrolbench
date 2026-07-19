@@ -1,0 +1,26 @@
+{
+  "task_id": "click-pr3678",
+  "repo": "pallets/click",
+  "base_sha": "8c1a0a7abbc1c36f70d1f65f3604acc46c5ce6ab",
+  "fix_sha": "b67832c2167e5b0ff6764a8c04a0a9087e697b5a",
+  "source_files": [
+    "src/click/core.py"
+  ],
+  "test_files": [
+    "tests/test_basic.py",
+    "tests/test_info_dict.py",
+    "tests/test_options.py"
+  ],
+  "fail_to_pass": [
+    "tests/test_basic.py::test_param_named_help[argument]",
+    "tests/test_basic.py::test_param_named_help[custom-flags]",
+    "tests/test_basic.py::test_param_named_help[no-collision]",
+    "tests/test_basic.py::test_param_named_help[option]",
+    "tests/test_basic.py::test_param_squatting_help_option_name",
+    "tests/test_info_dict.py::test_command[Command]",
+    "tests/test_info_dict.py::test_command[Group]",
+    "tests/test_info_dict.py::test_context",
+    "tests/test_options.py::test_argument_sharing_param_name_warning"
+  ],
+  "source_pr": 3678
+}

@@ -1,0 +1,15 @@
+{
+  "task_id": "task-r027",
+  "repo": "psf/requests",
+  "base_sha": "bc7dd0fc4d56",
+  "fix_sha": "f0198e6",
+  "source_files": [
+    "src/requests/utils.py"
+  ],
+  "test_files": [
+    "tests/test_utils.py"
+  ],
+  "fail_to_pass": [
+    "tests/test_utils.py::test_get_encoding_from_headers[value3-ISO-8859-1]"
+  ]
+}

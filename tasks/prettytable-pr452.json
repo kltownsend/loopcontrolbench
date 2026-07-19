@@ -1,0 +1,17 @@
+{
+  "task_id": "prettytable-pr452",
+  "repo": "prettytable/prettytable",
+  "base_sha": "6de4300c343282afc63a301cd23874816afed15e",
+  "fix_sha": "cf5f8fda23d958615ccd272f33d8edd69c8d0fd4",
+  "source_files": [
+    "src/prettytable/prettytable.py"
+  ],
+  "test_files": [
+    "tests/test_style.py"
+  ],
+  "fail_to_pass": [
+    "tests/test_style.py::test_ansi_wrap_no_bleed",
+    "tests/test_style.py::test_ansi_wrap_width"
+  ],
+  "source_pr": 452
+}

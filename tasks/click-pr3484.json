@@ -1,0 +1,19 @@
+{
+  "task_id": "click-pr3484",
+  "repo": "pallets/click",
+  "base_sha": "4b24a6c8f6658ef89fd6db4dcaf8ee88eef75dfa",
+  "fix_sha": "d42f15b71757de791a5781fb179fd972da9169f5",
+  "source_files": [
+    "src/click/core.py"
+  ],
+  "test_files": [
+    "tests/test_defaults.py",
+    "tests/test_options.py"
+  ],
+  "fail_to_pass": [
+    "tests/test_defaults.py::test_flask_debug_env_not_stomped_by_default_flag",
+    "tests/test_defaults.py::test_parameter_source_during_eager_callback",
+    "tests/test_defaults.py::test_parameter_source_during_paramtype_convert"
+  ],
+  "source_pr": 3484
+}

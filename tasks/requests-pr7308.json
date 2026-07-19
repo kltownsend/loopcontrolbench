@@ -1,0 +1,18 @@
+{
+  "task_id": "requests-pr7308",
+  "repo": "psf/requests",
+  "base_sha": "4443b1a847b190010c2972a658924b98b5db6360",
+  "fix_sha": "bc7dd0fc4d56e808bcdd85ac2d797b3107c89259",
+  "source_files": [
+    "src/requests/_internal_utils.py"
+  ],
+  "test_files": [
+    "tests/test_requests.py"
+  ],
+  "fail_to_pass": [
+    "tests/test_requests.py::TestRequests::test_header_no_return_chars[invalid_header11]",
+    "tests/test_requests.py::TestRequests::test_header_no_return_chars[invalid_header8]",
+    "tests/test_requests.py::TestRequests::test_header_no_return_chars[invalid_header9]"
+  ],
+  "source_pr": 7308
+}

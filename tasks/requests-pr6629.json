@@ -1,0 +1,16 @@
+{
+  "task_id": "requests-pr6629",
+  "repo": "psf/requests",
+  "base_sha": "7a13c041dbef42f9f3feb14110f02626f6892e9a",
+  "fix_sha": "382fc2c0c6c0ef0874bc65bc1175f97c073e5086",
+  "source_files": [
+    "src/requests/exceptions.py"
+  ],
+  "test_files": [
+    "tests/test_requests.py"
+  ],
+  "fail_to_pass": [
+    "tests/test_requests.py::test_json_decode_errors_are_serializable_deserializable"
+  ],
+  "source_pr": 6629
+}

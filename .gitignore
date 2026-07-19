@@ -1,0 +1,13 @@
+# controller venv and caches
+.venv/
+__pycache__/
+*.pyc
+
+# run artifacts / logs / markers (reproducible, not source)
+*.log
+*_done
+bench_done_*
+mined_*.json
+results/
+.work/
+gate_results/

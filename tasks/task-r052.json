@@ -1,0 +1,15 @@
+{
+  "task_id": "task-r052",
+  "repo": "pallets/click",
+  "base_sha": "6a1c0d077311",
+  "fix_sha": "1c20dc6",
+  "source_files": [
+    "src/click/core.py"
+  ],
+  "test_files": [
+    "tests/test_defaults.py"
+  ],
+  "fail_to_pass": [
+    "tests/test_defaults.py::test_shared_param_prefers_first_default"
+  ]
+}

@@ -1,0 +1,16 @@
+{
+  "task_id": "prettytable-pr378",
+  "repo": "prettytable/prettytable",
+  "base_sha": "88915082fa543aa3cac247880b12f81e6fed983e",
+  "fix_sha": "b3de36f62f65d1853a8f591c1469d089549ffe73",
+  "source_files": [
+    "src/prettytable/prettytable.py"
+  ],
+  "test_files": [
+    "tests/test_prettytable.py"
+  ],
+  "fail_to_pass": [
+    "tests/test_prettytable.py::TestBasic::test_add_rows"
+  ],
+  "source_pr": 378
+}

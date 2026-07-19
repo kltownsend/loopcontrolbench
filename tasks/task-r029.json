@@ -1,0 +1,15 @@
+{
+  "task_id": "task-r029",
+  "repo": "pallets/click",
+  "base_sha": "a8b41c077b22",
+  "fix_sha": "812b800",
+  "source_files": [
+    "src/click/termui.py"
+  ],
+  "test_files": [
+    "tests/test_utils.py"
+  ],
+  "fail_to_pass": [
+    "tests/test_utils.py::test_echo_writing_to_standard_error"
+  ]
+}

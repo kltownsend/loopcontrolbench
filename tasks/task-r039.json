@@ -1,0 +1,19 @@
+{
+  "task_id": "task-r039",
+  "repo": "marshmallow-code/marshmallow",
+  "base_sha": "ea26aeb08c37",
+  "fix_sha": "76bc28a",
+  "source_files": [
+    "src/marshmallow/validate.py"
+  ],
+  "test_files": [
+    "tests/test_validate.py"
+  ],
+  "fail_to_pass": [
+    "tests/test_validate.py::test_url_accepts_valid_file_urls[file:///C:/Users/test/file.txt]",
+    "tests/test_validate.py::test_url_accepts_valid_file_urls[file:///]",
+    "tests/test_validate.py::test_url_accepts_valid_file_urls[file:///home/user/documents/test.pdf]",
+    "tests/test_validate.py::test_url_accepts_valid_file_urls[file:///tmp/test%20file.txt]",
+    "tests/test_validate.py::test_url_accepts_valid_file_urls[file:///tmp/tmp1234]"
+  ]
+}

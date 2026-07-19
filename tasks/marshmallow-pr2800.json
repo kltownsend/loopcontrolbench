@@ -1,0 +1,20 @@
+{
+  "task_id": "marshmallow-pr2800",
+  "repo": "marshmallow-code/marshmallow",
+  "base_sha": "ea26aeb08c37c4e4c5bd323689c873d14f13d58d",
+  "fix_sha": "76bc28ae74e723760d54f097290ba85e717d5fe4",
+  "source_files": [
+    "src/marshmallow/validate.py"
+  ],
+  "test_files": [
+    "tests/test_validate.py"
+  ],
+  "fail_to_pass": [
+    "tests/test_validate.py::test_url_accepts_valid_file_urls[file:///C:/Users/test/file.txt]",
+    "tests/test_validate.py::test_url_accepts_valid_file_urls[file:///]",
+    "tests/test_validate.py::test_url_accepts_valid_file_urls[file:///home/user/documents/test.pdf]",
+    "tests/test_validate.py::test_url_accepts_valid_file_urls[file:///tmp/test%20file.txt]",
+    "tests/test_validate.py::test_url_accepts_valid_file_urls[file:///tmp/tmp1234]"
+  ],
+  "source_pr": 2800
+}

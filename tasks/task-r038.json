@@ -1,0 +1,15 @@
+{
+  "task_id": "task-r038",
+  "repo": "marshmallow-code/marshmallow",
+  "base_sha": "070dde08bad4",
+  "fix_sha": "65374df",
+  "source_files": [
+    "src/marshmallow/validate.py"
+  ],
+  "test_files": [
+    "tests/test_validate.py"
+  ],
+  "fail_to_pass": [
+    "tests/test_validate.py::test_oneof_options"
+  ]
+}

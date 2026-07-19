@@ -1,0 +1,16 @@
+{
+  "task_id": "more-itertools-pr1153",
+  "repo": "more-itertools/more-itertools",
+  "base_sha": "247e15b3a489d5805375c95dfa79486c9bd0eb1b",
+  "fix_sha": "1806a75b836b9eff4a7885a96ece6183f5fb6409",
+  "source_files": [
+    "more_itertools/more.py"
+  ],
+  "test_files": [
+    "tests/test_more.py"
+  ],
+  "fail_to_pass": [
+    "tests/test_more.py::NumericRangeTests::test_empty_reversed"
+  ],
+  "source_pr": 1153
+}

@@ -1,0 +1,16 @@
+{
+  "task_id": "task-r005",
+  "repo": "more-itertools/more-itertools",
+  "base_sha": "fdbd43c569fe",
+  "fix_sha": "be5793a55f58ee29521d8cbc9f14019f5833454e",
+  "source_files": [
+    "more_itertools/more.py"
+  ],
+  "test_files": [
+    "tests/test_more.py"
+  ],
+  "fail_to_pass": [
+    "tests/test_more.py::GrayProductTests::test_repeat_with_iterators",
+    "tests/test_more.py::PartialProductTests::test_repeat_with_iterators"
+  ]
+}

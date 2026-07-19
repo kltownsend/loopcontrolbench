@@ -1,0 +1,532 @@
+{
+ "model": "gpt-5-mini",
+ "env": "python:3.13-slim + git/build-essential (loopcontrolbench-base, containerized)",
+ "attempts": 1,
+ "sandboxed": true,
+ "pool_certified_in_image": "loopcontrolbench-base",
+ "solved": 46,
+ "total": 70,
+ "pass_rate": 65.7,
+ "by_repo": {
+  "click": "4/9",
+  "dateutil": "5/5",
+  "h2": "2/2",
+  "marshmallow": "9/11",
+  "more-itertools": "12/16",
+  "prettytable": "6/12",
+  "pyjwt": "5/6",
+  "requests": "3/9"
+ },
+ "dropped_at_gate": [
+  {
+   "task_id": "task-r030",
+   "repo": "psf/requests",
+   "reason": "collection_failed",
+   "detail": "test harness (pytest-httpbin -> httpbin) imports parse_authorization_header, removed from modern werkzeug; suite will not collect on the pinned image"
+  }
+ ],
+ "results": [
+  {
+   "task_id": "click-pr3126",
+   "repo": "pallets/click",
+   "solved": true,
+   "still_failing": []
+  },
+  {
+   "task_id": "click-pr3434",
+   "repo": "pallets/click",
+   "solved": false,
+   "still_failing": [
+    "tests/test_formatting.py::test_command_write_usage_no_args[empty-options-metavar-no-params]",
+    "tests/test_formatting.py::test_command_write_usage_no_args[none-options-metavar-no-params]",
+    "tests/test_formatting.py::test_help_formatter_write_usage[empty-args-custom-prefix]",
+    "tests/test_formatting.py::test_help_formatter_write_usage[empty-args-default-prefix]",
+    "tests/test_formatting.py::test_help_formatter_write_usage[empty-args-indented]",
+    "tests/test_formatting.py::test_help_formatter_write_usage[empty-args-long-prog]",
+    "tests/test_formatting.py::test_help_formatter_write_usage_without_args_styled_prefix"
+   ]
+  },
+  {
+   "task_id": "click-pr3482",
+   "repo": "pallets/click",
+   "solved": false,
+   "still_failing": [
+    "tests/test_testing.py::test_with_echo_via_pager"
+   ]
+  },
+  {
+   "task_id": "click-pr3484",
+   "repo": "pallets/click",
+   "solved": true,
+   "still_failing": []
+  },
+  {
+   "task_id": "click-pr3504",
+   "repo": "pallets/click",
+   "solved": false,
+   "still_failing": [
+    "tests/test_shell_completion.py::test_full_complete[fish-env4-plain,a\\nplain,b\\tbee\\n]",
+    "tests/test_shell_completion.py::test_full_complete[fish-env5-plain,b\\tbee\\n]",
+    "tests/test_shell_completion.py::test_full_complete[fish-env6-plain,b\\tbee\\n]"
+   ]
+  },
+  {
+   "task_id": "click-pr3509",
+   "repo": "pallets/click",
+   "solved": true,
+   "still_failing": []
+  },
+  {
+   "task_id": "click-pr3678",
+   "repo": "pallets/click",
+   "solved": false,
+   "still_failing": [
+    "tests/test_basic.py::test_param_named_help[argument]",
+    "tests/test_basic.py::test_param_named_help[custom-flags]",
+    "tests/test_basic.py::test_param_named_help[no-collision]",
+    "tests/test_basic.py::test_param_named_help[option]",
+    "tests/test_basic.py::test_param_squatting_help_option_name",
+    "tests/test_info_dict.py::test_command[Command]",
+    "tests/test_info_dict.py::test_command[Group]",
+    "tests/test_info_dict.py::test_context"
+   ]
+  },
+  {
+   "task_id": "dateutil-pr700",
+   "repo": "dateutil/dateutil",
+   "solved": true,
+   "still_failing": []
+  },
+  {
+   "task_id": "dateutil-pr751",
+   "repo": "dateutil/dateutil",
+   "solved": true,
+   "still_failing": []
+  },
+  {
+   "task_id": "dateutil-pr773",
+   "repo": "dateutil/dateutil",
+   "solved": true,
+   "still_failing": []
+  },
+  {
+   "task_id": "h2-pr1313",
+   "repo": "python-hyper/h2",
+   "solved": true,
+   "still_failing": []
+  },
+  {
+   "task_id": "marshmallow-pr2800",
+   "repo": "marshmallow-code/marshmallow",
+   "solved": true,
+   "still_failing": []
+  },
+  {
+   "task_id": "marshmallow-pr2861",
+   "repo": "marshmallow-code/marshmallow",
+   "solved": true,
+   "still_failing": []
+  },
+  {
+   "task_id": "marshmallow-pr2874",
+   "repo": "marshmallow-code/marshmallow",
+   "solved": true,
+   "still_failing": []
+  },
+  {
+   "task_id": "marshmallow-pr2892",
+   "repo": "marshmallow-code/marshmallow",
+   "solved": false,
+   "still_failing": [
+    "tests/test_validate.py::test_url_accepts_valid_file_urls[FILE:///C:/Users/test/file.txt]",
+    "tests/test_validate.py::test_url_accepts_valid_file_urls[FILE:///]",
+    "tests/test_validate.py::test_url_accepts_valid_file_urls[FILE:///home/user/documents/test.pdf]",
+    "tests/test_validate.py::test_url_accepts_valid_file_urls[FILE:///tmp/test%20file.txt]",
+    "tests/test_validate.py::test_url_accepts_valid_file_urls[FILE:///tmp/tmp1234]"
+   ]
+  },
+  {
+   "task_id": "marshmallow-pr2894",
+   "repo": "marshmallow-code/marshmallow",
+   "solved": true,
+   "still_failing": []
+  },
+  {
+   "task_id": "marshmallow-pr2901",
+   "repo": "marshmallow-code/marshmallow",
+   "solved": false,
+   "still_failing": [
+    "tests/test_deserialization.py::TestFieldDeserialization::test_constant_with_required"
+   ]
+  },
+  {
+   "task_id": "marshmallow-pr2902",
+   "repo": "marshmallow-code/marshmallow",
+   "solved": true,
+   "still_failing": []
+  },
+  {
+   "task_id": "marshmallow-pr2903",
+   "repo": "marshmallow-code/marshmallow",
+   "solved": true,
+   "still_failing": []
+  },
+  {
+   "task_id": "marshmallow-pr2909",
+   "repo": "marshmallow-code/marshmallow",
+   "solved": true,
+   "still_failing": []
+  },
+  {
+   "task_id": "more-itertools-pr1028",
+   "repo": "more-itertools/more-itertools",
+   "solved": true,
+   "still_failing": []
+  },
+  {
+   "task_id": "more-itertools-pr1082",
+   "repo": "more-itertools/more-itertools",
+   "solved": false,
+   "still_failing": [
+    "tests/test_more.py::ProductIndexTests::test_iterator_input"
+   ]
+  },
+  {
+   "task_id": "more-itertools-pr1088",
+   "repo": "more-itertools/more-itertools",
+   "solved": true,
+   "still_failing": []
+  },
+  {
+   "task_id": "more-itertools-pr1117",
+   "repo": "more-itertools/more-itertools",
+   "solved": false,
+   "still_failing": [
+    "tests/test_recipes.py::RandomProductTests::test_list_with_repeat"
+   ]
+  },
+  {
+   "task_id": "more-itertools-pr1118",
+   "repo": "more-itertools/more-itertools",
+   "solved": true,
+   "still_failing": []
+  },
+  {
+   "task_id": "more-itertools-pr1119",
+   "repo": "more-itertools/more-itertools",
+   "solved": false,
+   "still_failing": [
+    "tests/test_more.py::NthCombinationWithReplacementTests::test_basic",
+    "tests/test_more.py::NthCombinationWithReplacementTests::test_invalid_index",
+    "tests/test_recipes.py::NthPermutationTests::test_invalid_index"
+   ]
+  },
+  {
+   "task_id": "more-itertools-pr1125",
+   "repo": "more-itertools/more-itertools",
+   "solved": true,
+   "still_failing": []
+  },
+  {
+   "task_id": "more-itertools-pr1128",
+   "repo": "more-itertools/more-itertools",
+   "solved": true,
+   "still_failing": []
+  },
+  {
+   "task_id": "more-itertools-pr1153",
+   "repo": "more-itertools/more-itertools",
+   "solved": true,
+   "still_failing": []
+  },
+  {
+   "task_id": "more-itertools-pr1211",
+   "repo": "more-itertools/more-itertools",
+   "solved": true,
+   "still_failing": []
+  },
+  {
+   "task_id": "more-itertools-pr944",
+   "repo": "more-itertools/more-itertools",
+   "solved": true,
+   "still_failing": []
+  },
+  {
+   "task_id": "prettytable-pr289",
+   "repo": "prettytable/prettytable",
+   "solved": false,
+   "still_failing": [
+    "tests/test_prettytable.py::TestMaxTableWidth::test_max_table_width",
+    "tests/test_prettytable.py::TestMaxTableWidth::test_max_table_width_wide",
+    "tests/test_prettytable.py::TestMaxTableWidth::test_max_table_width_wide2",
+    "tests/test_prettytable.py::TestMaxTableWidth::test_max_table_width_wide_vrules_frame",
+    "tests/test_prettytable.py::TestMaxTableWidth::test_max_table_width_wide_vrules_none"
+   ]
+  },
+  {
+   "task_id": "prettytable-pr296",
+   "repo": "prettytable/prettytable",
+   "solved": false,
+   "still_failing": [
+    "tests/test_prettytable.py::TestStyle::test_style[MARKDOWN]",
+    "tests/test_prettytable.py::TestStyle::test_style_align[MARKDOWN]"
+   ]
+  },
+  {
+   "task_id": "prettytable-pr299",
+   "repo": "prettytable/prettytable",
+   "solved": false,
+   "still_failing": [
+    "tests/test_colortable.py::TestColorTableRendering::test_color_table_rendering"
+   ]
+  },
+  {
+   "task_id": "prettytable-pr332",
+   "repo": "prettytable/prettytable",
+   "solved": false,
+   "still_failing": [
+    "tests/test_colortable.py::TestColorTableRendering::test_color_table_rendering[True-False]"
+   ]
+  },
+  {
+   "task_id": "prettytable-pr344",
+   "repo": "prettytable/prettytable",
+   "solved": false,
+   "still_failing": [
+    "tests/test_prettytable.py::TestStyle::test_style_reset[DOUBLE_BORDER]",
+    "tests/test_prettytable.py::TestStyle::test_style_reset[RANDOM]",
+    "tests/test_prettytable.py::TestStyle::test_style_reset[SINGLE_BORDER]"
+   ]
+  },
+  {
+   "task_id": "prettytable-pr345",
+   "repo": "prettytable/prettytable",
+   "solved": true,
+   "still_failing": []
+  },
+  {
+   "task_id": "prettytable-pr355",
+   "repo": "prettytable/prettytable",
+   "solved": true,
+   "still_failing": []
+  },
+  {
+   "task_id": "prettytable-pr356",
+   "repo": "prettytable/prettytable",
+   "solved": true,
+   "still_failing": []
+  },
+  {
+   "task_id": "prettytable-pr378",
+   "repo": "prettytable/prettytable",
+   "solved": true,
+   "still_failing": []
+  },
+  {
+   "task_id": "prettytable-pr445",
+   "repo": "prettytable/prettytable",
+   "solved": true,
+   "still_failing": []
+  },
+  {
+   "task_id": "prettytable-pr452",
+   "repo": "prettytable/prettytable",
+   "solved": true,
+   "still_failing": []
+  },
+  {
+   "task_id": "pyjwt-pr1040",
+   "repo": "jpadilla/pyjwt",
+   "solved": true,
+   "still_failing": []
+  },
+  {
+   "task_id": "pyjwt-pr1045",
+   "repo": "jpadilla/pyjwt",
+   "solved": false,
+   "still_failing": [
+    "tests/test_api_jwt.py::TestJWT::test_jwt_with_options"
+   ]
+  },
+  {
+   "task_id": "pyjwt-pr1133",
+   "repo": "jpadilla/pyjwt",
+   "solved": true,
+   "still_failing": []
+  },
+  {
+   "task_id": "pyjwt-pr670",
+   "repo": "jpadilla/pyjwt",
+   "solved": true,
+   "still_failing": []
+  },
+  {
+   "task_id": "pyjwt-pr985",
+   "repo": "jpadilla/pyjwt",
+   "solved": true,
+   "still_failing": []
+  },
+  {
+   "task_id": "requests-pr6074",
+   "repo": "psf/requests",
+   "solved": false,
+   "still_failing": [
+    "tests/test_requests.py::TestRequests::test_env_cert_bundles[env4-True]",
+    "tests/test_requests.py::TestRequests::test_env_cert_bundles[env5-True]"
+   ]
+  },
+  {
+   "task_id": "requests-pr6097",
+   "repo": "psf/requests",
+   "solved": false,
+   "still_failing": [
+    "tests/test_lowlevel.py::test_json_decode_compatibility_for_alt_utf_encodings"
+   ]
+  },
+  {
+   "task_id": "requests-pr6629",
+   "repo": "psf/requests",
+   "solved": true,
+   "still_failing": []
+  },
+  {
+   "task_id": "requests-pr7205",
+   "repo": "psf/requests",
+   "solved": true,
+   "still_failing": []
+  },
+  {
+   "task_id": "requests-pr7308",
+   "repo": "psf/requests",
+   "solved": false,
+   "still_failing": [
+    "tests/test_requests.py::TestRequests::test_header_no_return_chars[invalid_header11]",
+    "tests/test_requests.py::TestRequests::test_header_no_return_chars[invalid_header8]",
+    "tests/test_requests.py::TestRequests::test_header_no_return_chars[invalid_header9]"
+   ]
+  },
+  {
+   "task_id": "requests-pr7309",
+   "repo": "psf/requests",
+   "solved": false,
+   "still_failing": [
+    "tests/test_utils.py::test_get_encoding_from_headers[value3-ISO-8859-1]"
+   ]
+  },
+  {
+   "task_id": "requests-pr7433",
+   "repo": "psf/requests",
+   "solved": true,
+   "still_failing": []
+  },
+  {
+   "task_id": "requests-pr7502",
+   "repo": "psf/requests",
+   "solved": false,
+   "still_failing": [
+    "tests/test_requests.py::TestRequests::test_post_named_tempfile"
+   ]
+  },
+  {
+   "task_id": "task-r005",
+   "repo": "more-itertools/more-itertools",
+   "solved": true,
+   "still_failing": []
+  },
+  {
+   "task_id": "task-r007",
+   "repo": "more-itertools/more-itertools",
+   "solved": false,
+   "still_failing": [
+    "tests/test_more.py::NthCombinationWithReplacementTests::test_basic",
+    "tests/test_more.py::NthCombinationWithReplacementTests::test_invalid_index"
+   ]
+  },
+  {
+   "task_id": "task-r008",
+   "repo": "jpadilla/pyjwt",
+   "solved": true,
+   "still_failing": []
+  },
+  {
+   "task_id": "task-r009",
+   "repo": "more-itertools/more-itertools",
+   "solved": true,
+   "still_failing": []
+  },
+  {
+   "task_id": "task-r011",
+   "repo": "python-hyper/h2",
+   "solved": true,
+   "still_failing": []
+  },
+  {
+   "task_id": "task-r012",
+   "repo": "more-itertools/more-itertools",
+   "solved": true,
+   "still_failing": []
+  },
+  {
+   "task_id": "task-r014",
+   "repo": "dateutil/dateutil",
+   "solved": true,
+   "still_failing": []
+  },
+  {
+   "task_id": "task-r016",
+   "repo": "dateutil/dateutil",
+   "solved": true,
+   "still_failing": []
+  },
+  {
+   "task_id": "task-r021",
+   "repo": "prettytable/prettytable",
+   "solved": false,
+   "still_failing": [
+    "tests/test_prettytable.py::TestStyle::test_style_reset[DOUBLE_BORDER]",
+    "tests/test_prettytable.py::TestStyle::test_style_reset[RANDOM]",
+    "tests/test_prettytable.py::TestStyle::test_style_reset[SINGLE_BORDER]"
+   ]
+  },
+  {
+   "task_id": "task-r027",
+   "repo": "psf/requests",
+   "solved": false,
+   "still_failing": [
+    "tests/test_utils.py::test_get_encoding_from_headers[value3-ISO-8859-1]"
+   ]
+  },
+  {
+   "task_id": "task-r029",
+   "repo": "pallets/click",
+   "solved": false,
+   "still_failing": [
+    "tests/test_utils.py::test_echo_writing_to_standard_error"
+   ]
+  },
+  {
+   "task_id": "task-r038",
+   "repo": "marshmallow-code/marshmallow",
+   "solved": true,
+   "still_failing": []
+  },
+  {
+   "task_id": "task-r039",
+   "repo": "marshmallow-code/marshmallow",
+   "solved": true,
+   "still_failing": []
+  },
+  {
+   "task_id": "task-r052",
+   "repo": "pallets/click",
+   "solved": true,
+   "still_failing": []
+  },
+  {
+   "task_id": "task-r055",
+   "repo": "more-itertools/more-itertools",
+   "solved": true,
+   "still_failing": []
+  }
+ ]
+}

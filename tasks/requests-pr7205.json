@@ -1,0 +1,16 @@
+{
+  "task_id": "requests-pr7205",
+  "repo": "psf/requests",
+  "base_sha": "1b40fdd004bfc8ba5301bcf8a6908264e9b6b877",
+  "fix_sha": "47914226c2968802f2cdee3f6f0f6e06e4472f64",
+  "source_files": [
+    "src/requests/utils.py"
+  ],
+  "test_files": [
+    "tests/test_utils.py"
+  ],
+  "fail_to_pass": [
+    "tests/test_utils.py::TestGetNetrcAuth::test_empty_default_credentials_ignored"
+  ],
+  "source_pr": 7205
+}

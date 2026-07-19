@@ -1,0 +1,19 @@
+{
+  "task_id": "more-itertools-pr1119",
+  "repo": "more-itertools/more-itertools",
+  "base_sha": "6b32fbfba127d6b4aaf57d6b254b2ab5fc80ae76",
+  "fix_sha": "881095e4b2041f9c32bb714cf53d7a193232c4b1",
+  "source_files": [
+    "more_itertools/more.py"
+  ],
+  "test_files": [
+    "tests/test_more.py",
+    "tests/test_recipes.py"
+  ],
+  "fail_to_pass": [
+    "tests/test_more.py::NthCombinationWithReplacementTests::test_basic",
+    "tests/test_more.py::NthCombinationWithReplacementTests::test_invalid_index",
+    "tests/test_recipes.py::NthPermutationTests::test_invalid_index"
+  ],
+  "source_pr": 1119
+}

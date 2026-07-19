@@ -1,0 +1,16 @@
+{
+  "task_id": "requests-pr6097",
+  "repo": "psf/requests",
+  "base_sha": "8bce583b9547c7b82d44c8e97f37cf9a16cbe758",
+  "fix_sha": "2d5517682b3b38547634d153cea43d48fbc8cdb5",
+  "source_files": [
+    "requests/models.py"
+  ],
+  "test_files": [
+    "tests/test_lowlevel.py"
+  ],
+  "fail_to_pass": [
+    "tests/test_lowlevel.py::test_json_decode_compatibility_for_alt_utf_encodings"
+  ],
+  "source_pr": 6097
+}

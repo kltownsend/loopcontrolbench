@@ -1,0 +1,27 @@
+{
+  "task_id": "task-r011",
+  "repo": "python-hyper/h2",
+  "base_sha": "18fa3480a7a9",
+  "fix_sha": "be8b4e3",
+  "source_files": [
+    "src/h2/utilities.py"
+  ],
+  "test_files": [
+    "tests/test_header_indexing.py",
+    "tests/test_utility_functions.py"
+  ],
+  "fail_to_pass": [
+    "tests/test_header_indexing.py::TestSecureHeaders::test_non_cookie_substring_headers_can_be_indexed[header0-headers0]",
+    "tests/test_header_indexing.py::TestSecureHeaders::test_non_cookie_substring_headers_can_be_indexed[header0-headers1]",
+    "tests/test_header_indexing.py::TestSecureHeaders::test_non_cookie_substring_headers_can_be_indexed[header1-headers0]",
+    "tests/test_header_indexing.py::TestSecureHeaders::test_non_cookie_substring_headers_can_be_indexed[header1-headers1]",
+    "tests/test_header_indexing.py::TestSecureHeaders::test_non_cookie_substring_headers_can_be_indexed[header2-headers0]",
+    "tests/test_header_indexing.py::TestSecureHeaders::test_non_cookie_substring_headers_can_be_indexed[header2-headers1]",
+    "tests/test_header_indexing.py::TestSecureHeaders::test_non_cookie_substring_headers_can_be_indexed[header3-headers0]",
+    "tests/test_header_indexing.py::TestSecureHeaders::test_non_cookie_substring_headers_can_be_indexed[header3-headers1]",
+    "tests/test_header_indexing.py::TestSecureHeaders::test_non_cookie_substring_headers_can_be_indexed[header4-headers0]",
+    "tests/test_header_indexing.py::TestSecureHeaders::test_non_cookie_substring_headers_can_be_indexed[header4-headers1]",
+    "tests/test_header_indexing.py::TestSecureHeaders::test_non_cookie_substring_headers_can_be_indexed[header5-headers0]",
+    "tests/test_header_indexing.py::TestSecureHeaders::test_non_cookie_substring_headers_can_be_indexed[header5-headers1]"
+  ]
+}

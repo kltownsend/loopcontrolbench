@@ -1,0 +1,16 @@
+{
+  "task_id": "pyjwt-pr1133",
+  "repo": "jpadilla/pyjwt",
+  "base_sha": "53e9381ef9e529ea196bf862e445e90b264ef940",
+  "fix_sha": "412cb67a93363812ae4029d6a95f5d4d40ab2609",
+  "source_files": [
+    "jwt/jwks_client.py"
+  ],
+  "test_files": [
+    "tests/test_jwks_client.py"
+  ],
+  "fail_to_pass": [
+    "tests/test_jwks_client.py::TestPyJWKClient::test_http_error_is_closed_on_connection_failure"
+  ],
+  "source_pr": 1133
+}

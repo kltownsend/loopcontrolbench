@@ -1,0 +1,17 @@
+{
+  "task_id": "pyjwt-pr670",
+  "repo": "jpadilla/pyjwt",
+  "base_sha": "a629ecd73221f12402066ccc4a13f04a7c856792",
+  "fix_sha": "c8ab900b831c4e859620c964d25737bf95d5eeb8",
+  "source_files": [
+    "jwt/api_jwt.py"
+  ],
+  "test_files": [
+    "tests/test_api_jwt.py"
+  ],
+  "fail_to_pass": [
+    "tests/test_api_jwt.py::TestJWT::test_decode_raises_exception_if_aud_is_none",
+    "tests/test_api_jwt.py::TestJWT::test_raise_exception_token_with_aud_none_and_without_audience"
+  ],
+  "source_pr": 670
+}

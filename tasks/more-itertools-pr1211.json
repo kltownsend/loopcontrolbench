@@ -1,0 +1,17 @@
+{
+  "task_id": "more-itertools-pr1211",
+  "repo": "more-itertools/more-itertools",
+  "base_sha": "301c957c8a50eca09c3b6eae416508a91487b552",
+  "fix_sha": "da37f9de442b69fbcaa9f54fb042c2a6999473a6",
+  "source_files": [
+    "more_itertools/recipes.py"
+  ],
+  "test_files": [
+    "tests/test_more.py"
+  ],
+  "fail_to_pass": [
+    "tests/test_more.py::TestRunningMax::test_stability",
+    "tests/test_more.py::TestRunningMin::test_stability"
+  ],
+  "source_pr": 1211
+}

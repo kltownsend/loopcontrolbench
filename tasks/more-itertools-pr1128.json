@@ -1,0 +1,16 @@
+{
+  "task_id": "more-itertools-pr1128",
+  "repo": "more-itertools/more-itertools",
+  "base_sha": "1c21c3ae9c7991b73044fe16807b70d1cac61e0b",
+  "fix_sha": "3bbe636e23bdfa359d80e6851e0c37abbc860d4c",
+  "source_files": [
+    "more_itertools/more.py"
+  ],
+  "test_files": [
+    "tests/test_more.py"
+  ],
+  "fail_to_pass": [
+    "tests/test_more.py::NumericRangeTests::test_get_item_by_slice"
+  ],
+  "source_pr": 1128
+}

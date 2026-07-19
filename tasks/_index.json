@@ -1,0 +1,1227 @@
+[
+ {
+  "task_id": "click-pr3126",
+  "repo": "pallets/click",
+  "base_sha": "c69643b60cf971cd5d8e5d3902632807ceab9b8f",
+  "fix_sha": "19fd4d6e18bc9fce451f92f422696b11169faa57",
+  "source_files": [
+   "src/click/shell_completion.py"
+  ],
+  "test_files": [
+   "tests/test_shell_completion.py"
+  ],
+  "fail_to_pass": [
+   "tests/test_shell_completion.py::test_fish_multiline_help_complete",
+   "tests/test_shell_completion.py::test_full_complete[fish-env4-plain\\na\\n_\\nplain\\nb\\nbee\\n]",
+   "tests/test_shell_completion.py::test_full_complete[fish-env5-plain\\nb\\nbee\\n]",
+   "tests/test_shell_completion.py::test_full_complete[fish-env6-plain\\nb\\nbee\\n]"
+  ],
+  "source_pr": 3126
+ },
+ {
+  "task_id": "click-pr3434",
+  "repo": "pallets/click",
+  "base_sha": "63274a79d08fdc5c19220696144489f7144a8547",
+  "fix_sha": "3bb230dcd5d751f8605b46e9df5a541639d5fd4e",
+  "source_files": [
+   "src/click/formatting.py"
+  ],
+  "test_files": [
+   "tests/test_formatting.py"
+  ],
+  "fail_to_pass": [
+   "tests/test_formatting.py::test_command_write_usage_no_args[empty-options-metavar-no-params]",
+   "tests/test_formatting.py::test_command_write_usage_no_args[none-options-metavar-no-params]",
+   "tests/test_formatting.py::test_help_formatter_write_usage[empty-args-custom-prefix]",
+   "tests/test_formatting.py::test_help_formatter_write_usage[empty-args-default-prefix]",
+   "tests/test_formatting.py::test_help_formatter_write_usage[empty-args-indented]",
+   "tests/test_formatting.py::test_help_formatter_write_usage[empty-args-long-prog]",
+   "tests/test_formatting.py::test_help_formatter_write_usage_without_args_styled_prefix"
+  ],
+  "source_pr": 3434
+ },
+ {
+  "task_id": "click-pr3482",
+  "repo": "pallets/click",
+  "base_sha": "a5f5aa6d4012d256ccca24638f2642fc371e9f77",
+  "fix_sha": "5ee8e3123d8ddece6c47eff9a7a7d4ca478c4f37",
+  "source_files": [
+   "src/click/_termui_impl.py"
+  ],
+  "test_files": [
+   "tests/test_termui.py",
+   "tests/test_testing.py"
+  ],
+  "fail_to_pass": [
+   "tests/test_testing.py::test_with_echo_via_pager"
+  ],
+  "source_pr": 3482
+ },
+ {
+  "task_id": "click-pr3484",
+  "repo": "pallets/click",
+  "base_sha": "4b24a6c8f6658ef89fd6db4dcaf8ee88eef75dfa",
+  "fix_sha": "d42f15b71757de791a5781fb179fd972da9169f5",
+  "source_files": [
+   "src/click/core.py"
+  ],
+  "test_files": [
+   "tests/test_defaults.py",
+   "tests/test_options.py"
+  ],
+  "fail_to_pass": [
+   "tests/test_defaults.py::test_flask_debug_env_not_stomped_by_default_flag",
+   "tests/test_defaults.py::test_parameter_source_during_eager_callback",
+   "tests/test_defaults.py::test_parameter_source_during_paramtype_convert"
+  ],
+  "source_pr": 3484
+ },
+ {
+  "task_id": "click-pr3504",
+  "repo": "pallets/click",
+  "base_sha": "bc36cd1a2b3bc18f401a98476154dbc5a2d212c9",
+  "fix_sha": "c3535905c77a29afc84861b29d3ad366ce5451bd",
+  "source_files": [
+   "src/click/shell_completion.py"
+  ],
+  "test_files": [
+   "tests/test_shell_completion.py"
+  ],
+  "fail_to_pass": [
+   "tests/test_shell_completion.py::test_full_complete[fish-env4-plain,a\\nplain,b\\tbee\\n]",
+   "tests/test_shell_completion.py::test_full_complete[fish-env5-plain,b\\tbee\\n]",
+   "tests/test_shell_completion.py::test_full_complete[fish-env6-plain,b\\tbee\\n]"
+  ],
+  "source_pr": 3504
+ },
+ {
+  "task_id": "click-pr3509",
+  "repo": "pallets/click",
+  "base_sha": "648d7c403829013ade629d63ddbfe808f6b2b770",
+  "fix_sha": "29bacc773e817b2e49a75b6258399dc3e129b031",
+  "source_files": [
+   "src/click/core.py"
+  ],
+  "test_files": [
+   "tests/test_commands.py",
+   "tests/test_options.py"
+  ],
+  "fail_to_pass": [
+   "tests/test_commands.py::test_deprecated_empty_help_no_leading_space[-True]",
+   "tests/test_commands.py::test_deprecated_empty_help_no_leading_space[None-True]",
+   "tests/test_options.py::test_deprecated_empty_help_no_leading_space[-True-(DEPRECATED)]"
+  ],
+  "source_pr": 3509
+ },
+ {
+  "task_id": "click-pr3678",
+  "repo": "pallets/click",
+  "base_sha": "8c1a0a7abbc1c36f70d1f65f3604acc46c5ce6ab",
+  "fix_sha": "b67832c2167e5b0ff6764a8c04a0a9087e697b5a",
+  "source_files": [
+   "src/click/core.py"
+  ],
+  "test_files": [
+   "tests/test_basic.py",
+   "tests/test_info_dict.py",
+   "tests/test_options.py"
+  ],
+  "fail_to_pass": [
+   "tests/test_basic.py::test_param_named_help[argument]",
+   "tests/test_basic.py::test_param_named_help[custom-flags]",
+   "tests/test_basic.py::test_param_named_help[no-collision]",
+   "tests/test_basic.py::test_param_named_help[option]",
+   "tests/test_basic.py::test_param_squatting_help_option_name",
+   "tests/test_info_dict.py::test_command[Command]",
+   "tests/test_info_dict.py::test_command[Group]",
+   "tests/test_info_dict.py::test_context",
+   "tests/test_options.py::test_argument_sharing_param_name_warning"
+  ],
+  "source_pr": 3678
+ },
+ {
+  "task_id": "dateutil-pr700",
+  "repo": "dateutil/dateutil",
+  "base_sha": "65b59f0e864a7bd647b5bb8dbee156b06ef9f6c9",
+  "fix_sha": "99d0b765a6e078f07d6040a23d353d5802a67eb8",
+  "source_files": [
+   "dateutil/parser/_parser.py"
+  ],
+  "test_files": [
+   "dateutil/test/test_parser.py"
+  ],
+  "fail_to_pass": [
+   "dateutil/test/test_parser.py::test_BYd_corner_case"
+  ],
+  "source_pr": 700
+ },
+ {
+  "task_id": "dateutil-pr751",
+  "repo": "dateutil/dateutil",
+  "base_sha": "fa3faf36d0c4e1dcd16f133d8c6d63d3a3cf7055",
+  "fix_sha": "94cfe1ea3a86331607b82a2848613504f337f751",
+  "source_files": [
+   "dateutil/parser/isoparser.py"
+  ],
+  "test_files": [
+   "dateutil/test/test_isoparser.py"
+  ],
+  "fail_to_pass": [
+   "dateutil/test/test_isoparser.py::test_datetime_midnight[2014-04-10T24:00:00.000000]",
+   "dateutil/test/test_isoparser.py::test_datetime_midnight[2014-04-10T24:00:00.000]",
+   "dateutil/test/test_isoparser.py::test_datetime_midnight[2014-04-10T24:00:00]",
+   "dateutil/test/test_isoparser.py::test_datetime_midnight[2014-04-10T24:00]",
+   "dateutil/test/test_isoparser.py::test_datetime_midnight[2014-04-10T24]"
+  ],
+  "source_pr": 751
+ },
+ {
+  "task_id": "dateutil-pr773",
+  "repo": "dateutil/dateutil",
+  "base_sha": "ef6cddd64808bc1cf67d378f7c9136d9757be6ca",
+  "fix_sha": "158be2b65a42d642896a48673f7b380d964b10b7",
+  "source_files": [
+   "dateutil/parser/isoparser.py"
+  ],
+  "test_files": [
+   "dateutil/test/test_isoparser.py"
+  ],
+  "fail_to_pass": [
+   "dateutil/test/test_isoparser.py::test_isotime_midnight[240000]",
+   "dateutil/test/test_isoparser.py::test_isotime_midnight[2400]",
+   "dateutil/test/test_isoparser.py::test_isotime_midnight[24:00:00,000000]",
+   "dateutil/test/test_isoparser.py::test_isotime_midnight[24:00:00,000]",
+   "dateutil/test/test_isoparser.py::test_isotime_midnight[24:00:00.000000]",
+   "dateutil/test/test_isoparser.py::test_isotime_midnight[24:00:00.000]",
+   "dateutil/test/test_isoparser.py::test_isotime_midnight[24:00:00]",
+   "dateutil/test/test_isoparser.py::test_isotime_midnight[24:00]"
+  ],
+  "source_pr": 773
+ },
+ {
+  "task_id": "h2-pr1313",
+  "repo": "python-hyper/h2",
+  "base_sha": "18fa3480a7a9009dd2db4a59269ff46a35b18ea5",
+  "fix_sha": "be8b4e3dab0c3325ec89f2b41edd69c7eee86b78",
+  "source_files": [
+   "src/h2/utilities.py"
+  ],
+  "test_files": [
+   "tests/test_header_indexing.py",
+   "tests/test_utility_functions.py"
+  ],
+  "fail_to_pass": [
+   "tests/test_header_indexing.py::TestSecureHeaders::test_non_cookie_substring_headers_can_be_indexed[header0-headers0]",
+   "tests/test_header_indexing.py::TestSecureHeaders::test_non_cookie_substring_headers_can_be_indexed[header0-headers1]",
+   "tests/test_header_indexing.py::TestSecureHeaders::test_non_cookie_substring_headers_can_be_indexed[header1-headers0]",
+   "tests/test_header_indexing.py::TestSecureHeaders::test_non_cookie_substring_headers_can_be_indexed[header1-headers1]",
+   "tests/test_header_indexing.py::TestSecureHeaders::test_non_cookie_substring_headers_can_be_indexed[header2-headers0]",
+   "tests/test_header_indexing.py::TestSecureHeaders::test_non_cookie_substring_headers_can_be_indexed[header2-headers1]",
+   "tests/test_header_indexing.py::TestSecureHeaders::test_non_cookie_substring_headers_can_be_indexed[header3-headers0]",
+   "tests/test_header_indexing.py::TestSecureHeaders::test_non_cookie_substring_headers_can_be_indexed[header3-headers1]",
+   "tests/test_header_indexing.py::TestSecureHeaders::test_non_cookie_substring_headers_can_be_indexed[header4-headers0]",
+   "tests/test_header_indexing.py::TestSecureHeaders::test_non_cookie_substring_headers_can_be_indexed[header4-headers1]",
+   "tests/test_header_indexing.py::TestSecureHeaders::test_non_cookie_substring_headers_can_be_indexed[header5-headers0]",
+   "tests/test_header_indexing.py::TestSecureHeaders::test_non_cookie_substring_headers_can_be_indexed[header5-headers1]",
+   "tests/test_header_indexing.py::TestSecureHeaders::test_non_cookie_substring_headers_can_be_indexed[header6-headers0]",
+   "tests/test_header_indexing.py::TestSecureHeaders::test_non_cookie_substring_headers_can_be_indexed[header6-headers1]",
+   "tests/test_header_indexing.py::TestSecureHeaders::test_non_cookie_substring_headers_can_be_indexed[header7-headers0]",
+   "tests/test_header_indexing.py::TestSecureHeaders::test_non_cookie_substring_headers_can_be_indexed[header7-headers1]"
+  ],
+  "source_pr": 1313
+ },
+ {
+  "task_id": "marshmallow-pr2800",
+  "repo": "marshmallow-code/marshmallow",
+  "base_sha": "ea26aeb08c37c4e4c5bd323689c873d14f13d58d",
+  "fix_sha": "76bc28ae74e723760d54f097290ba85e717d5fe4",
+  "source_files": [
+   "src/marshmallow/validate.py"
+  ],
+  "test_files": [
+   "tests/test_validate.py"
+  ],
+  "fail_to_pass": [
+   "tests/test_validate.py::test_url_accepts_valid_file_urls[file:///C:/Users/test/file.txt]",
+   "tests/test_validate.py::test_url_accepts_valid_file_urls[file:///]",
+   "tests/test_validate.py::test_url_accepts_valid_file_urls[file:///home/user/documents/test.pdf]",
+   "tests/test_validate.py::test_url_accepts_valid_file_urls[file:///tmp/test%20file.txt]",
+   "tests/test_validate.py::test_url_accepts_valid_file_urls[file:///tmp/tmp1234]"
+  ],
+  "source_pr": 2800
+ },
+ {
+  "task_id": "marshmallow-pr2861",
+  "repo": "marshmallow-code/marshmallow",
+  "base_sha": "fc8726244820b9f08fb7d02e007ed8d378a46c7b",
+  "fix_sha": "2b84b56e9a80d07b65d74811673e8e5cf46cd0f1",
+  "source_files": [
+   "src/marshmallow/constants.py"
+  ],
+  "test_files": [
+   "tests/test_deserialization.py"
+  ],
+  "fail_to_pass": [
+   "tests/test_deserialization.py::TestFieldDeserialization::test_function_field_deserialization_missing_with_length_validator"
+  ],
+  "source_pr": 2861
+ },
+ {
+  "task_id": "marshmallow-pr2874",
+  "repo": "marshmallow-code/marshmallow",
+  "base_sha": "880d87f6acc389aa80c223dae4013f7eed05ab13",
+  "fix_sha": "10fe10be814a77765a76334e00bc6f69cd18409b",
+  "source_files": [
+   "src/marshmallow/validate.py"
+  ],
+  "test_files": [
+   "tests/test_validate.py"
+  ],
+  "fail_to_pass": [
+   "tests/test_validate.py::test_url_custom_scheme_case_insensitive"
+  ],
+  "source_pr": 2874
+ },
+ {
+  "task_id": "marshmallow-pr2892",
+  "repo": "marshmallow-code/marshmallow",
+  "base_sha": "78a94ea0e7ee9f35f8322318064232fe6147f190",
+  "fix_sha": "39e7c833e9c8711a49d6d710f7e3ee5cf2effbbe",
+  "source_files": [
+   "src/marshmallow/validate.py"
+  ],
+  "test_files": [
+   "tests/test_validate.py"
+  ],
+  "fail_to_pass": [
+   "tests/test_validate.py::test_url_accepts_valid_file_urls[FILE:///C:/Users/test/file.txt]",
+   "tests/test_validate.py::test_url_accepts_valid_file_urls[FILE:///]",
+   "tests/test_validate.py::test_url_accepts_valid_file_urls[FILE:///home/user/documents/test.pdf]",
+   "tests/test_validate.py::test_url_accepts_valid_file_urls[FILE:///tmp/test%20file.txt]",
+   "tests/test_validate.py::test_url_accepts_valid_file_urls[FILE:///tmp/tmp1234]"
+  ],
+  "source_pr": 2892
+ },
+ {
+  "task_id": "marshmallow-pr2894",
+  "repo": "marshmallow-code/marshmallow",
+  "base_sha": "213ee3a020e24fb26ead3a2285ba0402c90080ce",
+  "fix_sha": "19ca8dce2d5bde94509a4a89e495f35c695442d5",
+  "source_files": [
+   "src/marshmallow/fields.py"
+  ],
+  "test_files": [
+   "tests/test_deserialization.py"
+  ],
+  "fail_to_pass": [
+   "tests/test_deserialization.py::TestFieldDeserialization::test_constant_none_allows_none_value"
+  ],
+  "source_pr": 2894
+ },
+ {
+  "task_id": "marshmallow-pr2901",
+  "repo": "marshmallow-code/marshmallow",
+  "base_sha": "fea5428567960f15be0c9a3a4b99c0d9bb63848c",
+  "fix_sha": "070dde08bad456e743a0d2e1842c142a799a9568",
+  "source_files": [
+   "src/marshmallow/fields.py"
+  ],
+  "test_files": [
+   "tests/test_deserialization.py"
+  ],
+  "fail_to_pass": [
+   "tests/test_deserialization.py::TestFieldDeserialization::test_constant_with_required"
+  ],
+  "source_pr": 2901
+ },
+ {
+  "task_id": "marshmallow-pr2902",
+  "repo": "marshmallow-code/marshmallow",
+  "base_sha": "252090c7c707166cf4fcfcdc73eb4376b7bbc4b7",
+  "fix_sha": "024b5d09e9f026f0f96d220e243be69346687ce0",
+  "source_files": [
+   "src/marshmallow/fields.py"
+  ],
+  "test_files": [
+   "tests/test_deserialization.py"
+  ],
+  "fail_to_pass": [
+   "tests/test_deserialization.py::TestFieldDeserialization::test_enum_field_by_symbol_rejects_non_member_attributes[__class__]",
+   "tests/test_deserialization.py::TestFieldDeserialization::test_enum_field_by_symbol_rejects_non_member_attributes[__members__]",
+   "tests/test_deserialization.py::TestFieldDeserialization::test_enum_field_by_symbol_rejects_non_member_attributes[mro]"
+  ],
+  "source_pr": 2902
+ },
+ {
+  "task_id": "marshmallow-pr2903",
+  "repo": "marshmallow-code/marshmallow",
+  "base_sha": "65374df0c31cdc45acc4435741779298201306a2",
+  "fix_sha": "252090c7c707166cf4fcfcdc73eb4376b7bbc4b7",
+  "source_files": [
+   "src/marshmallow/schema.py"
+  ],
+  "test_files": [
+   "tests/test_deserialization.py"
+  ],
+  "fail_to_pass": [
+   "tests/test_deserialization.py::TestValidation::test_nested_partial_tuple_with_data_key"
+  ],
+  "source_pr": 2903
+ },
+ {
+  "task_id": "marshmallow-pr2909",
+  "repo": "marshmallow-code/marshmallow",
+  "base_sha": "070dde08bad456e743a0d2e1842c142a799a9568",
+  "fix_sha": "65374df0c31cdc45acc4435741779298201306a2",
+  "source_files": [
+   "src/marshmallow/validate.py"
+  ],
+  "test_files": [
+   "tests/test_validate.py"
+  ],
+  "fail_to_pass": [
+   "tests/test_validate.py::test_oneof_options"
+  ],
+  "source_pr": 2909
+ },
+ {
+  "task_id": "more-itertools-pr1028",
+  "repo": "more-itertools/more-itertools",
+  "base_sha": "c834d6e4a0c4280b7b7750cb0de8dd8acb3d4c2c",
+  "fix_sha": "7de169f7ad39eb1f95f8358225476e6f1a59d3d7",
+  "source_files": [
+   "more_itertools/more.py"
+  ],
+  "test_files": [
+   "tests/test_more.py"
+  ],
+  "fail_to_pass": [
+   "tests/test_more.py::LastTests::test_reversed_is_none"
+  ],
+  "source_pr": 1028
+ },
+ {
+  "task_id": "more-itertools-pr1082",
+  "repo": "more-itertools/more-itertools",
+  "base_sha": "aa8c480086052d4c2a64490d3214e67b7c6e674b",
+  "fix_sha": "5a1d64d1915df11481dcd31ffaf7165419064116",
+  "source_files": [
+   "more_itertools/more.py"
+  ],
+  "test_files": [
+   "tests/test_more.py"
+  ],
+  "fail_to_pass": [
+   "tests/test_more.py::ProductIndexTests::test_iterator_input"
+  ],
+  "source_pr": 1082
+ },
+ {
+  "task_id": "more-itertools-pr1088",
+  "repo": "more-itertools/more-itertools",
+  "base_sha": "55fcdd8013baff9d2f5b3ab890904a0964fb61df",
+  "fix_sha": "22cf656cc0458cfcee2286c0a02369da000023ad",
+  "source_files": [
+   "more_itertools/more.py"
+  ],
+  "test_files": [
+   "tests/test_more.py"
+  ],
+  "fail_to_pass": [
+   "tests/test_more.py::ExactlyNTests::test_false"
+  ],
+  "source_pr": 1088
+ },
+ {
+  "task_id": "more-itertools-pr1117",
+  "repo": "more-itertools/more-itertools",
+  "base_sha": "f2bd64cea7c9a92e4c1fae0be9a1271f6a3fbfb9",
+  "fix_sha": "6b32fbfba127d6b4aaf57d6b254b2ab5fc80ae76",
+  "source_files": [
+   "more_itertools/more.py",
+   "more_itertools/recipes.py"
+  ],
+  "test_files": [
+   "tests/test_more.py",
+   "tests/test_recipes.py"
+  ],
+  "fail_to_pass": [
+   "tests/test_more.py::NthProductTests::test_repeat",
+   "tests/test_more.py::ProductIndexTests::test_repeat",
+   "tests/test_recipes.py::RandomProductTests::test_list_with_repeat"
+  ],
+  "source_pr": 1117
+ },
+ {
+  "task_id": "more-itertools-pr1118",
+  "repo": "more-itertools/more-itertools",
+  "base_sha": "b110a77364ec0ed5bb06194b591f97a54591dbc9",
+  "fix_sha": "f2bd64cea7c9a92e4c1fae0be9a1271f6a3fbfb9",
+  "source_files": [
+   "more_itertools/recipes.py"
+  ],
+  "test_files": [
+   "tests/test_recipes.py"
+  ],
+  "fail_to_pass": [
+   "tests/test_recipes.py::NthCombinationTests::test_invalid_r"
+  ],
+  "source_pr": 1118
+ },
+ {
+  "task_id": "more-itertools-pr1119",
+  "repo": "more-itertools/more-itertools",
+  "base_sha": "6b32fbfba127d6b4aaf57d6b254b2ab5fc80ae76",
+  "fix_sha": "881095e4b2041f9c32bb714cf53d7a193232c4b1",
+  "source_files": [
+   "more_itertools/more.py"
+  ],
+  "test_files": [
+   "tests/test_more.py",
+   "tests/test_recipes.py"
+  ],
+  "fail_to_pass": [
+   "tests/test_more.py::NthCombinationWithReplacementTests::test_basic",
+   "tests/test_more.py::NthCombinationWithReplacementTests::test_invalid_index",
+   "tests/test_recipes.py::NthPermutationTests::test_invalid_index"
+  ],
+  "source_pr": 1119
+ },
+ {
+  "task_id": "more-itertools-pr1125",
+  "repo": "more-itertools/more-itertools",
+  "base_sha": "fdbd43c569feb4388302ddee0551d18edd39fadc",
+  "fix_sha": "c0ed9d187906d202b9276a0750b3c377584cb75f",
+  "source_files": [
+   "more_itertools/more.py"
+  ],
+  "test_files": [
+   "tests/test_more.py"
+  ],
+  "fail_to_pass": [
+   "tests/test_more.py::GrayProductTests::test_repeat_with_iterators",
+   "tests/test_more.py::PartialProductTests::test_repeat_with_iterators"
+  ],
+  "source_pr": 1125
+ },
+ {
+  "task_id": "more-itertools-pr1128",
+  "repo": "more-itertools/more-itertools",
+  "base_sha": "1c21c3ae9c7991b73044fe16807b70d1cac61e0b",
+  "fix_sha": "3bbe636e23bdfa359d80e6851e0c37abbc860d4c",
+  "source_files": [
+   "more_itertools/more.py"
+  ],
+  "test_files": [
+   "tests/test_more.py"
+  ],
+  "fail_to_pass": [
+   "tests/test_more.py::NumericRangeTests::test_get_item_by_slice"
+  ],
+  "source_pr": 1128
+ },
+ {
+  "task_id": "more-itertools-pr1153",
+  "repo": "more-itertools/more-itertools",
+  "base_sha": "247e15b3a489d5805375c95dfa79486c9bd0eb1b",
+  "fix_sha": "1806a75b836b9eff4a7885a96ece6183f5fb6409",
+  "source_files": [
+   "more_itertools/more.py"
+  ],
+  "test_files": [
+   "tests/test_more.py"
+  ],
+  "fail_to_pass": [
+   "tests/test_more.py::NumericRangeTests::test_empty_reversed"
+  ],
+  "source_pr": 1153
+ },
+ {
+  "task_id": "more-itertools-pr1211",
+  "repo": "more-itertools/more-itertools",
+  "base_sha": "301c957c8a50eca09c3b6eae416508a91487b552",
+  "fix_sha": "da37f9de442b69fbcaa9f54fb042c2a6999473a6",
+  "source_files": [
+   "more_itertools/recipes.py"
+  ],
+  "test_files": [
+   "tests/test_more.py"
+  ],
+  "fail_to_pass": [
+   "tests/test_more.py::TestRunningMax::test_stability",
+   "tests/test_more.py::TestRunningMin::test_stability"
+  ],
+  "source_pr": 1211
+ },
+ {
+  "task_id": "more-itertools-pr944",
+  "repo": "more-itertools/more-itertools",
+  "base_sha": "18225d856665bfc3bfdfcdbfa585290f92645daf",
+  "fix_sha": "7b9889c0b7de2189e7dd77688f7a811ce43337cc",
+  "source_files": [
+   "more_itertools/more.py"
+  ],
+  "test_files": [
+   "tests/test_more.py"
+  ],
+  "fail_to_pass": [
+   "tests/test_more.py::SampleTests::test_error_cases"
+  ],
+  "source_pr": 944
+ },
+ {
+  "task_id": "prettytable-pr289",
+  "repo": "prettytable/prettytable",
+  "base_sha": "6498a578ba81ccb45d741905d6ef675b1b53a709",
+  "fix_sha": "39ea810b5dc418b0610f813b26d13e87469e30ed",
+  "source_files": [
+   "src/prettytable/prettytable.py"
+  ],
+  "test_files": [
+   "tests/test_prettytable.py"
+  ],
+  "fail_to_pass": [
+   "tests/test_prettytable.py::TestMaxTableWidth::test_max_table_width",
+   "tests/test_prettytable.py::TestMaxTableWidth::test_max_table_width_wide",
+   "tests/test_prettytable.py::TestMaxTableWidth::test_max_table_width_wide2",
+   "tests/test_prettytable.py::TestMaxTableWidth::test_max_table_width_wide_vrules_frame",
+   "tests/test_prettytable.py::TestMaxTableWidth::test_max_table_width_wide_vrules_none"
+  ],
+  "source_pr": 289
+ },
+ {
+  "task_id": "prettytable-pr296",
+  "repo": "prettytable/prettytable",
+  "base_sha": "1f156f8f82a8442fcec332018de0d66fa308acce",
+  "fix_sha": "2702d6b714164eba38e2bdd5b02ab30d1b5d0a80",
+  "source_files": [
+   "src/prettytable/prettytable.py"
+  ],
+  "test_files": [
+   "tests/test_prettytable.py"
+  ],
+  "fail_to_pass": [
+   "tests/test_prettytable.py::TestStyle::test_style[MARKDOWN]",
+   "tests/test_prettytable.py::TestStyle::test_style_align[MARKDOWN]"
+  ],
+  "source_pr": 296
+ },
+ {
+  "task_id": "prettytable-pr299",
+  "repo": "prettytable/prettytable",
+  "base_sha": "2702d6b714164eba38e2bdd5b02ab30d1b5d0a80",
+  "fix_sha": "0edf8e9745b87d229b32fcdfa3a7dadf5d87d73d",
+  "source_files": [
+   "src/prettytable/prettytable.py"
+  ],
+  "test_files": [
+   "tests/test_colortable.py"
+  ],
+  "fail_to_pass": [
+   "tests/test_colortable.py::TestColorTableRendering::test_color_table_rendering"
+  ],
+  "source_pr": 299
+ },
+ {
+  "task_id": "prettytable-pr332",
+  "repo": "prettytable/prettytable",
+  "base_sha": "db520f85cfe4028a01d848d5d2776d1c4b4eab50",
+  "fix_sha": "5ffbc2d36b5220f8035ae91b0a6d5405ec524d41",
+  "source_files": [
+   "src/prettytable/prettytable.py"
+  ],
+  "test_files": [
+   "tests/test_colortable.py"
+  ],
+  "fail_to_pass": [
+   "tests/test_colortable.py::TestColorTableRendering::test_color_table_rendering[True-False]"
+  ],
+  "source_pr": 332
+ },
+ {
+  "task_id": "prettytable-pr344",
+  "repo": "prettytable/prettytable",
+  "base_sha": "cf5b1670e56afc28bcf76142faa3bbcfedcfa85b",
+  "fix_sha": "920cc8dfb1998df40b0ba09eae6e060abfd2aac8",
+  "source_files": [
+   "src/prettytable/prettytable.py"
+  ],
+  "test_files": [
+   "tests/test_prettytable.py"
+  ],
+  "fail_to_pass": [
+   "tests/test_prettytable.py::TestStyle::test_style_reset[DOUBLE_BORDER]",
+   "tests/test_prettytable.py::TestStyle::test_style_reset[RANDOM]",
+   "tests/test_prettytable.py::TestStyle::test_style_reset[SINGLE_BORDER]"
+  ],
+  "source_pr": 344
+ },
+ {
+  "task_id": "prettytable-pr345",
+  "repo": "prettytable/prettytable",
+  "base_sha": "79f5999fd5b90aea0b3324bc6fb99f48f7db5daf",
+  "fix_sha": "cf5b1670e56afc28bcf76142faa3bbcfedcfa85b",
+  "source_files": [
+   "src/prettytable/prettytable.py"
+  ],
+  "test_files": [
+   "tests/test_prettytable.py"
+  ],
+  "fail_to_pass": [
+   "tests/test_prettytable.py::TestMaxTableWidth::test_table_formatted_html_autoindex"
+  ],
+  "source_pr": 345
+ },
+ {
+  "task_id": "prettytable-pr355",
+  "repo": "prettytable/prettytable",
+  "base_sha": "d448aa14417a4eefa0d3641829be19c51c17f1f0",
+  "fix_sha": "44124c302b072f6fca30c4df3acd77154dfea9cf",
+  "source_files": [
+   "src/prettytable/prettytable.py"
+  ],
+  "test_files": [
+   "tests/test_prettytable.py"
+  ],
+  "fail_to_pass": [
+   "tests/test_prettytable.py::TestFields::test_fields_at_class_declaration",
+   "tests/test_prettytable.py::TestSorting::test_sort_key_at_class_declaration",
+   "tests/test_prettytable.py::TestSorting::test_sortby_at_class_declaration"
+  ],
+  "source_pr": 355
+ },
+ {
+  "task_id": "prettytable-pr356",
+  "repo": "prettytable/prettytable",
+  "base_sha": "44124c302b072f6fca30c4df3acd77154dfea9cf",
+  "fix_sha": "d80599bdacc93053743c47b1ee5be42404732f03",
+  "source_files": [
+   "src/prettytable/prettytable.py"
+  ],
+  "test_files": [
+   "tests/test_prettytable.py"
+  ],
+  "fail_to_pass": [
+   "tests/test_prettytable.py::TestRowEndSection::test_row_end_section"
+  ],
+  "source_pr": 356
+ },
+ {
+  "task_id": "prettytable-pr378",
+  "repo": "prettytable/prettytable",
+  "base_sha": "88915082fa543aa3cac247880b12f81e6fed983e",
+  "fix_sha": "b3de36f62f65d1853a8f591c1469d089549ffe73",
+  "source_files": [
+   "src/prettytable/prettytable.py"
+  ],
+  "test_files": [
+   "tests/test_prettytable.py"
+  ],
+  "fail_to_pass": [
+   "tests/test_prettytable.py::TestBasic::test_add_rows"
+  ],
+  "source_pr": 378
+ },
+ {
+  "task_id": "prettytable-pr445",
+  "repo": "prettytable/prettytable",
+  "base_sha": "37a02661a7fab52d4d2db613ffeda44ea928ae60",
+  "fix_sha": "6ba75d41436d4400624c3e2f32727e127016b8c6",
+  "source_files": [
+   "src/prettytable/prettytable.py"
+  ],
+  "test_files": [
+   "tests/test_prettytable.py"
+  ],
+  "fail_to_pass": [
+   "tests/test_prettytable.py::TestBasic::test_horizontal_align_char_getter"
+  ],
+  "source_pr": 445
+ },
+ {
+  "task_id": "prettytable-pr452",
+  "repo": "prettytable/prettytable",
+  "base_sha": "6de4300c343282afc63a301cd23874816afed15e",
+  "fix_sha": "cf5f8fda23d958615ccd272f33d8edd69c8d0fd4",
+  "source_files": [
+   "src/prettytable/prettytable.py"
+  ],
+  "test_files": [
+   "tests/test_style.py"
+  ],
+  "fail_to_pass": [
+   "tests/test_style.py::test_ansi_wrap_no_bleed",
+   "tests/test_style.py::test_ansi_wrap_width"
+  ],
+  "source_pr": 452
+ },
+ {
+  "task_id": "pyjwt-pr1040",
+  "repo": "jpadilla/pyjwt",
+  "base_sha": "ebc941de508f76acaa78defb15197092458f1874",
+  "fix_sha": "9085670a1f69de3e86c7d122317c3b2707e0123b",
+  "source_files": [
+   "jwt/api_jwt.py"
+  ],
+  "test_files": [
+   "tests/test_api_jwt.py"
+  ],
+  "fail_to_pass": [
+   "tests/test_api_jwt.py::TestJWT::test_encode_with_non_str_iss",
+   "tests/test_api_jwt.py::TestJWT::test_validate_iss_with_non_str_issuer"
+  ],
+  "source_pr": 1040
+ },
+ {
+  "task_id": "pyjwt-pr1045",
+  "repo": "jpadilla/pyjwt",
+  "base_sha": "9085670a1f69de3e86c7d122317c3b2707e0123b",
+  "fix_sha": "29fbfc36d95f3df41bc9650b6711347549829bf3",
+  "source_files": [
+   "docs/conf.py",
+   "jwt/algorithms.py",
+   "jwt/api_jwk.py",
+   "jwt/api_jws.py",
+   "jwt/api_jwt.py",
+   "jwt/exceptions.py",
+   "jwt/types.py"
+  ],
+  "test_files": [
+   "tests/test_api_jwt.py"
+  ],
+  "fail_to_pass": [
+   "tests/test_api_jwt.py::TestJWT::test_jwt_with_options"
+  ],
+  "source_pr": 1045
+ },
+ {
+  "task_id": "pyjwt-pr1133",
+  "repo": "jpadilla/pyjwt",
+  "base_sha": "53e9381ef9e529ea196bf862e445e90b264ef940",
+  "fix_sha": "412cb67a93363812ae4029d6a95f5d4d40ab2609",
+  "source_files": [
+   "jwt/jwks_client.py"
+  ],
+  "test_files": [
+   "tests/test_jwks_client.py"
+  ],
+  "fail_to_pass": [
+   "tests/test_jwks_client.py::TestPyJWKClient::test_http_error_is_closed_on_connection_failure"
+  ],
+  "source_pr": 1133
+ },
+ {
+  "task_id": "pyjwt-pr670",
+  "repo": "jpadilla/pyjwt",
+  "base_sha": "a629ecd73221f12402066ccc4a13f04a7c856792",
+  "fix_sha": "c8ab900b831c4e859620c964d25737bf95d5eeb8",
+  "source_files": [
+   "jwt/api_jwt.py"
+  ],
+  "test_files": [
+   "tests/test_api_jwt.py"
+  ],
+  "fail_to_pass": [
+   "tests/test_api_jwt.py::TestJWT::test_decode_raises_exception_if_aud_is_none",
+   "tests/test_api_jwt.py::TestJWT::test_raise_exception_token_with_aud_none_and_without_audience"
+  ],
+  "source_pr": 670
+ },
+ {
+  "task_id": "pyjwt-pr985",
+  "repo": "jpadilla/pyjwt",
+  "base_sha": "9b3f9ad380e9bb9051ce33551a2d3645d9653dfc",
+  "fix_sha": "d5ca701dd87ed8d336175153eba9bd7c60435bdb",
+  "source_files": [
+   "jwt/algorithms.py"
+  ],
+  "test_files": [
+   "tests/test_algorithms.py"
+  ],
+  "fail_to_pass": [
+   "tests/test_algorithms.py::TestAlgorithms::test_check_crypto_key_type_should_fail_when_not_using_crypto"
+  ],
+  "source_pr": 985
+ },
+ {
+  "task_id": "requests-pr6074",
+  "repo": "psf/requests",
+  "base_sha": "5e749546a26ce62e53d0a14ae1455f8b066fe19f",
+  "fix_sha": "79f60274f7e461b8fd2f579e741f748438d7eadb",
+  "source_files": [
+   "requests/sessions.py"
+  ],
+  "test_files": [
+   "tests/test_requests.py"
+  ],
+  "fail_to_pass": [
+   "tests/test_requests.py::TestRequests::test_env_cert_bundles[env4-True]",
+   "tests/test_requests.py::TestRequests::test_env_cert_bundles[env5-True]"
+  ],
+  "source_pr": 6074
+ },
+ {
+  "task_id": "requests-pr6097",
+  "repo": "psf/requests",
+  "base_sha": "8bce583b9547c7b82d44c8e97f37cf9a16cbe758",
+  "fix_sha": "2d5517682b3b38547634d153cea43d48fbc8cdb5",
+  "source_files": [
+   "requests/models.py"
+  ],
+  "test_files": [
+   "tests/test_lowlevel.py"
+  ],
+  "fail_to_pass": [
+   "tests/test_lowlevel.py::test_json_decode_compatibility_for_alt_utf_encodings"
+  ],
+  "source_pr": 6097
+ },
+ {
+  "task_id": "requests-pr6629",
+  "repo": "psf/requests",
+  "base_sha": "7a13c041dbef42f9f3feb14110f02626f6892e9a",
+  "fix_sha": "382fc2c0c6c0ef0874bc65bc1175f97c073e5086",
+  "source_files": [
+   "src/requests/exceptions.py"
+  ],
+  "test_files": [
+   "tests/test_requests.py"
+  ],
+  "fail_to_pass": [
+   "tests/test_requests.py::test_json_decode_errors_are_serializable_deserializable"
+  ],
+  "source_pr": 6629
+ },
+ {
+  "task_id": "requests-pr7205",
+  "repo": "psf/requests",
+  "base_sha": "1b40fdd004bfc8ba5301bcf8a6908264e9b6b877",
+  "fix_sha": "47914226c2968802f2cdee3f6f0f6e06e4472f64",
+  "source_files": [
+   "src/requests/utils.py"
+  ],
+  "test_files": [
+   "tests/test_utils.py"
+  ],
+  "fail_to_pass": [
+   "tests/test_utils.py::TestGetNetrcAuth::test_empty_default_credentials_ignored"
+  ],
+  "source_pr": 7205
+ },
+ {
+  "task_id": "requests-pr7308",
+  "repo": "psf/requests",
+  "base_sha": "4443b1a847b190010c2972a658924b98b5db6360",
+  "fix_sha": "bc7dd0fc4d56e808bcdd85ac2d797b3107c89259",
+  "source_files": [
+   "src/requests/_internal_utils.py"
+  ],
+  "test_files": [
+   "tests/test_requests.py"
+  ],
+  "fail_to_pass": [
+   "tests/test_requests.py::TestRequests::test_header_no_return_chars[invalid_header11]",
+   "tests/test_requests.py::TestRequests::test_header_no_return_chars[invalid_header8]",
+   "tests/test_requests.py::TestRequests::test_header_no_return_chars[invalid_header9]"
+  ],
+  "source_pr": 7308
+ },
+ {
+  "task_id": "requests-pr7309",
+  "repo": "psf/requests",
+  "base_sha": "bc7dd0fc4d56e808bcdd85ac2d797b3107c89259",
+  "fix_sha": "f0198e6dfc431a2293dc16e1b1e8fcddc910a7f3",
+  "source_files": [
+   "src/requests/utils.py"
+  ],
+  "test_files": [
+   "tests/test_utils.py"
+  ],
+  "fail_to_pass": [
+   "tests/test_utils.py::test_get_encoding_from_headers[value3-ISO-8859-1]"
+  ],
+  "source_pr": 7309
+ },
+ {
+  "task_id": "requests-pr7433",
+  "repo": "psf/requests",
+  "base_sha": "0b401c76b6e80a4eecf3c690085b2553f6e261ca",
+  "fix_sha": "6404f345e562d962abe6700a1c357ec1e7e18232",
+  "source_files": [
+   "src/requests/models.py"
+  ],
+  "test_files": [
+   "tests/test_requests.py"
+  ],
+  "fail_to_pass": [
+   "tests/test_requests.py::TestRequests::test_getattr_proxy_stream_follows_redirect"
+  ],
+  "source_pr": 7433
+ },
+ {
+  "task_id": "requests-pr7502",
+  "repo": "psf/requests",
+  "base_sha": "661970d171d9c3e12e4c789c4768db647d8c4da0",
+  "fix_sha": "6f205ff422bccd5e4c4fc0b64c5f3e7df5181db6",
+  "source_files": [
+   "src/requests/models.py"
+  ],
+  "test_files": [
+   "tests/test_requests.py"
+  ],
+  "fail_to_pass": [
+   "tests/test_requests.py::TestRequests::test_post_named_tempfile"
+  ],
+  "source_pr": 7502
+ },
+ {
+  "task_id": "task-r005",
+  "repo": "more-itertools/more-itertools",
+  "base_sha": "fdbd43c569fe",
+  "fix_sha": "be5793a55f58ee29521d8cbc9f14019f5833454e",
+  "source_files": [
+   "more_itertools/more.py"
+  ],
+  "test_files": [
+   "tests/test_more.py"
+  ],
+  "fail_to_pass": [
+   "tests/test_more.py::GrayProductTests::test_repeat_with_iterators",
+   "tests/test_more.py::PartialProductTests::test_repeat_with_iterators"
+  ]
+ },
+ {
+  "task_id": "task-r007",
+  "repo": "more-itertools/more-itertools",
+  "base_sha": "def2d821c0a1",
+  "fix_sha": "06f31819121eb0620d3165fda73a44cbf71b140d",
+  "source_files": [
+   "more_itertools/more.py"
+  ],
+  "test_files": [
+   "tests/test_more.py"
+  ],
+  "fail_to_pass": [
+   "tests/test_more.py::NthCombinationWithReplacementTests::test_basic",
+   "tests/test_more.py::NthCombinationWithReplacementTests::test_invalid_index"
+  ]
+ },
+ {
+  "task_id": "task-r008",
+  "repo": "jpadilla/pyjwt",
+  "base_sha": "4e15dbd9aaef",
+  "fix_sha": "0a99cc2427c751275ea0002acca9ba0c07c25834",
+  "source_files": [
+   "jwt/api_jwt.py"
+  ],
+  "test_files": [
+   "tests/test_api_jwt.py"
+  ],
+  "fail_to_pass": [
+   "tests/test_api_jwt.py::TestJWT::test_decode_works_if_iat_is_str_of_a_number"
+  ]
+ },
+ {
+  "task_id": "task-r009",
+  "repo": "more-itertools/more-itertools",
+  "base_sha": "f75535b5ed95",
+  "fix_sha": "adeda34bd11ff636f5f19238cf422a73e1455483",
+  "source_files": [
+   "more_itertools/more.py"
+  ],
+  "test_files": [
+   "tests/test_more.py"
+  ],
+  "fail_to_pass": [
+   "tests/test_more.py::ExactlyNTests::test_false"
+  ]
+ },
+ {
+  "task_id": "task-r011",
+  "repo": "python-hyper/h2",
+  "base_sha": "18fa3480a7a9",
+  "fix_sha": "be8b4e3",
+  "source_files": [
+   "src/h2/utilities.py"
+  ],
+  "test_files": [
+   "tests/test_header_indexing.py",
+   "tests/test_utility_functions.py"
+  ],
+  "fail_to_pass": [
+   "tests/test_header_indexing.py::TestSecureHeaders::test_non_cookie_substring_headers_can_be_indexed[header0-headers0]",
+   "tests/test_header_indexing.py::TestSecureHeaders::test_non_cookie_substring_headers_can_be_indexed[header0-headers1]",
+   "tests/test_header_indexing.py::TestSecureHeaders::test_non_cookie_substring_headers_can_be_indexed[header1-headers0]",
+   "tests/test_header_indexing.py::TestSecureHeaders::test_non_cookie_substring_headers_can_be_indexed[header1-headers1]",
+   "tests/test_header_indexing.py::TestSecureHeaders::test_non_cookie_substring_headers_can_be_indexed[header2-headers0]",
+   "tests/test_header_indexing.py::TestSecureHeaders::test_non_cookie_substring_headers_can_be_indexed[header2-headers1]",
+   "tests/test_header_indexing.py::TestSecureHeaders::test_non_cookie_substring_headers_can_be_indexed[header3-headers0]",
+   "tests/test_header_indexing.py::TestSecureHeaders::test_non_cookie_substring_headers_can_be_indexed[header3-headers1]",
+   "tests/test_header_indexing.py::TestSecureHeaders::test_non_cookie_substring_headers_can_be_indexed[header4-headers0]",
+   "tests/test_header_indexing.py::TestSecureHeaders::test_non_cookie_substring_headers_can_be_indexed[header4-headers1]",
+   "tests/test_header_indexing.py::TestSecureHeaders::test_non_cookie_substring_headers_can_be_indexed[header5-headers0]",
+   "tests/test_header_indexing.py::TestSecureHeaders::test_non_cookie_substring_headers_can_be_indexed[header5-headers1]"
+  ]
+ },
+ {
+  "task_id": "task-r012",
+  "repo": "more-itertools/more-itertools",
+  "base_sha": "fdbd43c569fe",
+  "fix_sha": "be5793a",
+  "source_files": [
+   "more_itertools/more.py"
+  ],
+  "test_files": [
+   "tests/test_more.py"
+  ],
+  "fail_to_pass": [
+   "tests/test_more.py::GrayProductTests::test_repeat_with_iterators",
+   "tests/test_more.py::PartialProductTests::test_repeat_with_iterators"
+  ]
+ },
+ {
+  "task_id": "task-r014",
+  "repo": "dateutil/dateutil",
+  "base_sha": "86e33512c41a",
+  "fix_sha": "424a438",
+  "source_files": [
+   "dateutil/parser/isoparser.py"
+  ],
+  "test_files": [
+   "dateutil/test/test_isoparser.py"
+  ],
+  "fail_to_pass": [
+   "dateutil/test/test_isoparser.py::test_datetime_midnight[2014-04-10T24:00:00.000000]",
+   "dateutil/test/test_isoparser.py::test_datetime_midnight[2014-04-10T24:00:00.000]",
+   "dateutil/test/test_isoparser.py::test_datetime_midnight[2014-04-10T24:00:00]",
+   "dateutil/test/test_isoparser.py::test_datetime_midnight[2014-04-10T24:00]",
+   "dateutil/test/test_isoparser.py::test_datetime_midnight[2014-04-10T24]"
+  ]
+ },
+ {
+  "task_id": "task-r016",
+  "repo": "dateutil/dateutil",
+  "base_sha": "7783055c6bd6",
+  "fix_sha": "16424e9",
+  "source_files": [
+   "dateutil/parser/_parser.py"
+  ],
+  "test_files": [
+   "dateutil/test/test_parser.py"
+  ],
+  "fail_to_pass": [
+   "dateutil/test/test_parser.py::test_decimal_error[Nan]"
+  ]
+ },
+ {
+  "task_id": "task-r021",
+  "repo": "prettytable/prettytable",
+  "base_sha": "cf5b1670e56a",
+  "fix_sha": "920cc8d",
+  "source_files": [
+   "src/prettytable/prettytable.py"
+  ],
+  "test_files": [
+   "tests/test_prettytable.py"
+  ],
+  "fail_to_pass": [
+   "tests/test_prettytable.py::TestStyle::test_style_reset[DOUBLE_BORDER]",
+   "tests/test_prettytable.py::TestStyle::test_style_reset[RANDOM]",
+   "tests/test_prettytable.py::TestStyle::test_style_reset[SINGLE_BORDER]"
+  ]
+ },
+ {
+  "task_id": "task-r027",
+  "repo": "psf/requests",
+  "base_sha": "bc7dd0fc4d56",
+  "fix_sha": "f0198e6",
+  "source_files": [
+   "src/requests/utils.py"
+  ],
+  "test_files": [
+   "tests/test_utils.py"
+  ],
+  "fail_to_pass": [
+   "tests/test_utils.py::test_get_encoding_from_headers[value3-ISO-8859-1]"
+  ]
+ },
+ {
+  "task_id": "task-r029",
+  "repo": "pallets/click",
+  "base_sha": "a8b41c077b22",
+  "fix_sha": "812b800",
+  "source_files": [
+   "src/click/termui.py"
+  ],
+  "test_files": [
+   "tests/test_utils.py"
+  ],
+  "fail_to_pass": [
+   "tests/test_utils.py::test_echo_writing_to_standard_error"
+  ]
+ },
+ {
+  "task_id": "task-r038",
+  "repo": "marshmallow-code/marshmallow",
+  "base_sha": "070dde08bad4",
+  "fix_sha": "65374df",
+  "source_files": [
+   "src/marshmallow/validate.py"
+  ],
+  "test_files": [
+   "tests/test_validate.py"
+  ],
+  "fail_to_pass": [
+   "tests/test_validate.py::test_oneof_options"
+  ]
+ },
+ {
+  "task_id": "task-r039",
+  "repo": "marshmallow-code/marshmallow",
+  "base_sha": "ea26aeb08c37",
+  "fix_sha": "76bc28a",
+  "source_files": [
+   "src/marshmallow/validate.py"
+  ],
+  "test_files": [
+   "tests/test_validate.py"
+  ],
+  "fail_to_pass": [
+   "tests/test_validate.py::test_url_accepts_valid_file_urls[file:///C:/Users/test/file.txt]",
+   "tests/test_validate.py::test_url_accepts_valid_file_urls[file:///]",
+   "tests/test_validate.py::test_url_accepts_valid_file_urls[file:///home/user/documents/test.pdf]",
+   "tests/test_validate.py::test_url_accepts_valid_file_urls[file:///tmp/test%20file.txt]",
+   "tests/test_validate.py::test_url_accepts_valid_file_urls[file:///tmp/tmp1234]"
+  ]
+ },
+ {
+  "task_id": "task-r052",
+  "repo": "pallets/click",
+  "base_sha": "6a1c0d077311",
+  "fix_sha": "1c20dc6",
+  "source_files": [
+   "src/click/core.py"
+  ],
+  "test_files": [
+   "tests/test_defaults.py"
+  ],
+  "fail_to_pass": [
+   "tests/test_defaults.py::test_shared_param_prefers_first_default"
+  ]
+ },
+ {
+  "task_id": "task-r055",
+  "repo": "more-itertools/more-itertools",
+  "base_sha": "247e15b3a489",
+  "fix_sha": "edb3346",
+  "source_files": [
+   "more_itertools/more.py"
+  ],
+  "test_files": [
+   "tests/test_more.py"
+  ],
+  "fail_to_pass": [
+   "tests/test_more.py::NumericRangeTests::test_empty_reversed"
+  ]
+ }
+]

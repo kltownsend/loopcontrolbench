@@ -1,0 +1,19 @@
+{
+  "task_id": "click-pr3509",
+  "repo": "pallets/click",
+  "base_sha": "648d7c403829013ade629d63ddbfe808f6b2b770",
+  "fix_sha": "29bacc773e817b2e49a75b6258399dc3e129b031",
+  "source_files": [
+    "src/click/core.py"
+  ],
+  "test_files": [
+    "tests/test_commands.py",
+    "tests/test_options.py"
+  ],
+  "fail_to_pass": [
+    "tests/test_commands.py::test_deprecated_empty_help_no_leading_space[-True]",
+    "tests/test_commands.py::test_deprecated_empty_help_no_leading_space[None-True]",
+    "tests/test_options.py::test_deprecated_empty_help_no_leading_space[-True-(DEPRECATED)]"
+  ],
+  "source_pr": 3509
+}

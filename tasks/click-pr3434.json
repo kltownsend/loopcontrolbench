@@ -1,0 +1,22 @@
+{
+  "task_id": "click-pr3434",
+  "repo": "pallets/click",
+  "base_sha": "63274a79d08fdc5c19220696144489f7144a8547",
+  "fix_sha": "3bb230dcd5d751f8605b46e9df5a541639d5fd4e",
+  "source_files": [
+    "src/click/formatting.py"
+  ],
+  "test_files": [
+    "tests/test_formatting.py"
+  ],
+  "fail_to_pass": [
+    "tests/test_formatting.py::test_command_write_usage_no_args[empty-options-metavar-no-params]",
+    "tests/test_formatting.py::test_command_write_usage_no_args[none-options-metavar-no-params]",
+    "tests/test_formatting.py::test_help_formatter_write_usage[empty-args-custom-prefix]",
+    "tests/test_formatting.py::test_help_formatter_write_usage[empty-args-default-prefix]",
+    "tests/test_formatting.py::test_help_formatter_write_usage[empty-args-indented]",
+    "tests/test_formatting.py::test_help_formatter_write_usage[empty-args-long-prog]",
+    "tests/test_formatting.py::test_help_formatter_write_usage_without_args_styled_prefix"
+  ],
+  "source_pr": 3434
+}

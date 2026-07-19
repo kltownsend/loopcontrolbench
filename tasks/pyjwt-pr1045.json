@@ -1,0 +1,22 @@
+{
+  "task_id": "pyjwt-pr1045",
+  "repo": "jpadilla/pyjwt",
+  "base_sha": "9085670a1f69de3e86c7d122317c3b2707e0123b",
+  "fix_sha": "29fbfc36d95f3df41bc9650b6711347549829bf3",
+  "source_files": [
+    "docs/conf.py",
+    "jwt/algorithms.py",
+    "jwt/api_jwk.py",
+    "jwt/api_jws.py",
+    "jwt/api_jwt.py",
+    "jwt/exceptions.py",
+    "jwt/types.py"
+  ],
+  "test_files": [
+    "tests/test_api_jwt.py"
+  ],
+  "fail_to_pass": [
+    "tests/test_api_jwt.py::TestJWT::test_jwt_with_options"
+  ],
+  "source_pr": 1045
+}

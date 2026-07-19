@@ -1,0 +1,16 @@
+{
+  "task_id": "dateutil-pr700",
+  "repo": "dateutil/dateutil",
+  "base_sha": "65b59f0e864a7bd647b5bb8dbee156b06ef9f6c9",
+  "fix_sha": "99d0b765a6e078f07d6040a23d353d5802a67eb8",
+  "source_files": [
+    "dateutil/parser/_parser.py"
+  ],
+  "test_files": [
+    "dateutil/test/test_parser.py"
+  ],
+  "fail_to_pass": [
+    "dateutil/test/test_parser.py::test_BYd_corner_case"
+  ],
+  "source_pr": 700
+}

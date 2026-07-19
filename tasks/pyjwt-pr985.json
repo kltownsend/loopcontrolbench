@@ -1,0 +1,16 @@
+{
+  "task_id": "pyjwt-pr985",
+  "repo": "jpadilla/pyjwt",
+  "base_sha": "9b3f9ad380e9bb9051ce33551a2d3645d9653dfc",
+  "fix_sha": "d5ca701dd87ed8d336175153eba9bd7c60435bdb",
+  "source_files": [
+    "jwt/algorithms.py"
+  ],
+  "test_files": [
+    "tests/test_algorithms.py"
+  ],
+  "fail_to_pass": [
+    "tests/test_algorithms.py::TestAlgorithms::test_check_crypto_key_type_should_fail_when_not_using_crypto"
+  ],
+  "source_pr": 985
+}

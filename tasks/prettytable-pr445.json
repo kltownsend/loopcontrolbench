@@ -1,0 +1,16 @@
+{
+  "task_id": "prettytable-pr445",
+  "repo": "prettytable/prettytable",
+  "base_sha": "37a02661a7fab52d4d2db613ffeda44ea928ae60",
+  "fix_sha": "6ba75d41436d4400624c3e2f32727e127016b8c6",
+  "source_files": [
+    "src/prettytable/prettytable.py"
+  ],
+  "test_files": [
+    "tests/test_prettytable.py"
+  ],
+  "fail_to_pass": [
+    "tests/test_prettytable.py::TestBasic::test_horizontal_align_char_getter"
+  ],
+  "source_pr": 445
+}

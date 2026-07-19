@@ -1,0 +1,17 @@
+{
+  "task_id": "click-pr3482",
+  "repo": "pallets/click",
+  "base_sha": "a5f5aa6d4012d256ccca24638f2642fc371e9f77",
+  "fix_sha": "5ee8e3123d8ddece6c47eff9a7a7d4ca478c4f37",
+  "source_files": [
+    "src/click/_termui_impl.py"
+  ],
+  "test_files": [
+    "tests/test_termui.py",
+    "tests/test_testing.py"
+  ],
+  "fail_to_pass": [
+    "tests/test_testing.py::test_with_echo_via_pager"
+  ],
+  "source_pr": 3482
+}

@@ -1,0 +1,18 @@
+{
+  "task_id": "prettytable-pr355",
+  "repo": "prettytable/prettytable",
+  "base_sha": "d448aa14417a4eefa0d3641829be19c51c17f1f0",
+  "fix_sha": "44124c302b072f6fca30c4df3acd77154dfea9cf",
+  "source_files": [
+    "src/prettytable/prettytable.py"
+  ],
+  "test_files": [
+    "tests/test_prettytable.py"
+  ],
+  "fail_to_pass": [
+    "tests/test_prettytable.py::TestFields::test_fields_at_class_declaration",
+    "tests/test_prettytable.py::TestSorting::test_sort_key_at_class_declaration",
+    "tests/test_prettytable.py::TestSorting::test_sortby_at_class_declaration"
+  ],
+  "source_pr": 355
+}

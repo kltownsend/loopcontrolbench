@@ -1,0 +1,16 @@
+{
+  "task_id": "marshmallow-pr2903",
+  "repo": "marshmallow-code/marshmallow",
+  "base_sha": "65374df0c31cdc45acc4435741779298201306a2",
+  "fix_sha": "252090c7c707166cf4fcfcdc73eb4376b7bbc4b7",
+  "source_files": [
+    "src/marshmallow/schema.py"
+  ],
+  "test_files": [
+    "tests/test_deserialization.py"
+  ],
+  "fail_to_pass": [
+    "tests/test_deserialization.py::TestValidation::test_nested_partial_tuple_with_data_key"
+  ],
+  "source_pr": 2903
+}

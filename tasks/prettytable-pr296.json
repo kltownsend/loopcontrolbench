@@ -1,0 +1,17 @@
+{
+  "task_id": "prettytable-pr296",
+  "repo": "prettytable/prettytable",
+  "base_sha": "1f156f8f82a8442fcec332018de0d66fa308acce",
+  "fix_sha": "2702d6b714164eba38e2bdd5b02ab30d1b5d0a80",
+  "source_files": [
+    "src/prettytable/prettytable.py"
+  ],
+  "test_files": [
+    "tests/test_prettytable.py"
+  ],
+  "fail_to_pass": [
+    "tests/test_prettytable.py::TestStyle::test_style[MARKDOWN]",
+    "tests/test_prettytable.py::TestStyle::test_style_align[MARKDOWN]"
+  ],
+  "source_pr": 296
+}

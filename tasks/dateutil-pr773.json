@@ -1,0 +1,23 @@
+{
+  "task_id": "dateutil-pr773",
+  "repo": "dateutil/dateutil",
+  "base_sha": "ef6cddd64808bc1cf67d378f7c9136d9757be6ca",
+  "fix_sha": "158be2b65a42d642896a48673f7b380d964b10b7",
+  "source_files": [
+    "dateutil/parser/isoparser.py"
+  ],
+  "test_files": [
+    "dateutil/test/test_isoparser.py"
+  ],
+  "fail_to_pass": [
+    "dateutil/test/test_isoparser.py::test_isotime_midnight[240000]",
+    "dateutil/test/test_isoparser.py::test_isotime_midnight[2400]",
+    "dateutil/test/test_isoparser.py::test_isotime_midnight[24:00:00,000000]",
+    "dateutil/test/test_isoparser.py::test_isotime_midnight[24:00:00,000]",
+    "dateutil/test/test_isoparser.py::test_isotime_midnight[24:00:00.000000]",
+    "dateutil/test/test_isoparser.py::test_isotime_midnight[24:00:00.000]",
+    "dateutil/test/test_isoparser.py::test_isotime_midnight[24:00:00]",
+    "dateutil/test/test_isoparser.py::test_isotime_midnight[24:00]"
+  ],
+  "source_pr": 773
+}

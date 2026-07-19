@@ -1,0 +1,16 @@
+{
+  "task_id": "more-itertools-pr1088",
+  "repo": "more-itertools/more-itertools",
+  "base_sha": "55fcdd8013baff9d2f5b3ab890904a0964fb61df",
+  "fix_sha": "22cf656cc0458cfcee2286c0a02369da000023ad",
+  "source_files": [
+    "more_itertools/more.py"
+  ],
+  "test_files": [
+    "tests/test_more.py"
+  ],
+  "fail_to_pass": [
+    "tests/test_more.py::ExactlyNTests::test_false"
+  ],
+  "source_pr": 1088
+}

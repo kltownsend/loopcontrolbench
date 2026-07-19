@@ -1,0 +1,16 @@
+{
+  "task_id": "more-itertools-pr1118",
+  "repo": "more-itertools/more-itertools",
+  "base_sha": "b110a77364ec0ed5bb06194b591f97a54591dbc9",
+  "fix_sha": "f2bd64cea7c9a92e4c1fae0be9a1271f6a3fbfb9",
+  "source_files": [
+    "more_itertools/recipes.py"
+  ],
+  "test_files": [
+    "tests/test_recipes.py"
+  ],
+  "fail_to_pass": [
+    "tests/test_recipes.py::NthCombinationTests::test_invalid_r"
+  ],
+  "source_pr": 1118
+}

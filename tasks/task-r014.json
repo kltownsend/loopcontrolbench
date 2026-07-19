@@ -1,0 +1,19 @@
+{
+  "task_id": "task-r014",
+  "repo": "dateutil/dateutil",
+  "base_sha": "86e33512c41a",
+  "fix_sha": "424a438",
+  "source_files": [
+    "dateutil/parser/isoparser.py"
+  ],
+  "test_files": [
+    "dateutil/test/test_isoparser.py"
+  ],
+  "fail_to_pass": [
+    "dateutil/test/test_isoparser.py::test_datetime_midnight[2014-04-10T24:00:00.000000]",
+    "dateutil/test/test_isoparser.py::test_datetime_midnight[2014-04-10T24:00:00.000]",
+    "dateutil/test/test_isoparser.py::test_datetime_midnight[2014-04-10T24:00:00]",
+    "dateutil/test/test_isoparser.py::test_datetime_midnight[2014-04-10T24:00]",
+    "dateutil/test/test_isoparser.py::test_datetime_midnight[2014-04-10T24]"
+  ]
+}

@@ -1,0 +1,15 @@
+{
+  "task_id": "task-r016",
+  "repo": "dateutil/dateutil",
+  "base_sha": "7783055c6bd6",
+  "fix_sha": "16424e9",
+  "source_files": [
+    "dateutil/parser/_parser.py"
+  ],
+  "test_files": [
+    "dateutil/test/test_parser.py"
+  ],
+  "fail_to_pass": [
+    "dateutil/test/test_parser.py::test_decimal_error[Nan]"
+  ]
+}

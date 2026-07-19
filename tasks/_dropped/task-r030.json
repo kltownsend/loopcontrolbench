@@ -1,0 +1,20 @@
+{
+ "task_id": "task-r030",
+ "repo": "psf/requests",
+ "base_sha": "96b22fa18c00",
+ "fix_sha": "3ff3ff2",
+ "source_files": [
+  "src/requests/exceptions.py"
+ ],
+ "test_files": [
+  "tests/test_requests.py"
+ ],
+ "fail_to_pass": [
+  "tests/test_requests.py::test_json_decode_errors_are_serializable_deserializable"
+ ],
+ "dropped": {
+  "at": "gate",
+  "reason": "collection_failed",
+  "detail": "requests test harness (pytest-httpbin -> httpbin) imports parse_authorization_header, removed from modern werkzeug; the suite will not collect on the pinned Python 3.13 image."
+ }
+}

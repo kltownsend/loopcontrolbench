@@ -1,0 +1,16 @@
+{
+  "task_id": "prettytable-pr332",
+  "repo": "prettytable/prettytable",
+  "base_sha": "db520f85cfe4028a01d848d5d2776d1c4b4eab50",
+  "fix_sha": "5ffbc2d36b5220f8035ae91b0a6d5405ec524d41",
+  "source_files": [
+    "src/prettytable/prettytable.py"
+  ],
+  "test_files": [
+    "tests/test_colortable.py"
+  ],
+  "fail_to_pass": [
+    "tests/test_colortable.py::TestColorTableRendering::test_color_table_rendering[True-False]"
+  ],
+  "source_pr": 332
+}
