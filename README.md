@@ -20,7 +20,9 @@ Run it **only inside a disposable, isolated VM or container** with:
 
 The default runner (`tools/run_sandboxed.py`, which `bench.sh` uses) enforces this. Each task's install and tests run in a disposable container (`loopcontrolbench-base`, built from `python:3.13-slim` plus `git` and a compiler) that inherits **none** of your environment (no API keys, no credentials, no tokens), mounts only the per-task work directory (no home directory, no SSH or cloud config, no Docker socket), runs the tests with the **network disabled**, is held to memory, CPU, and PID limits, and is torn down after every task. The host does only git and the model call, so the key never enters the container. Docker is required for this path; build the image once with `docker build -t loopcontrolbench-base tools/`.
 
-Tests run with the network disabled. **Dependency installation still runs with network access inside the container** (it is needed for `pip`), so an untrusted install hook is contained but not network-isolated; closing that remaining exposure is on the [roadmap](#roadmap). The scoring logic also exists as `tools/run.py` for local development, which runs a single task **unsandboxed** — do not point it at untrusted repositories outside a VM.
+Egress is locked down in both untrusted phases. Tests run with `--network none`. **Dependency installation** needs `pip`, so it cannot be fully offline, but it does not get open network either: the install container runs on an `--internal` Docker network with no route out, and its only egress is a small allowlist proxy (`tools/allowlist_proxy.py`, baked into the image) that tunnels HTTPS to package hosts only and refuses any host resolving to a private, loopback, or link-local address. So a malicious build backend or dependency hook cannot reach the cloud metadata endpoint (`169.254.169.254`), internal services, or arbitrary hosts — even if it ignores the proxy environment, there is no other route for the packets. The allowlist is `pypi.org,files.pythonhosted.org,pythonhosted.org` by default (override with `BENCH_PROXY_ALLOW`). The proxy runs from the trusted base image, never from a repo.
+
+The scoring logic also exists as `tools/run.py` for local development, which runs a single task **unsandboxed** — do not point it at untrusted repositories outside a VM.
 
 ## The reference number
 
@@ -156,9 +158,9 @@ The code and task metadata in this repository are MIT (see `LICENSE`). **The pro
 
 ## Roadmap
 
-Per-task container isolation (no host env, restricted mounts, no Docker socket, resource limits, network off during tests, teardown) is **done**. Remaining:
+Per-task container isolation (no host env, restricted mounts, no Docker socket, resource limits, network off during tests, teardown) is **done**. Install-phase egress lockdown (internal network with no route out, egress only through an allowlist proxy to package hosts, private/link-local IPs refused) is **done**. Remaining:
 
-- Harden the install step: pre-fetch dependencies, then install with the network disabled, so no untrusted code ever runs with network access (today the install step still has network for `pip`).
+- Tighten the install allowlist further (per-run pinned index, hash-checked downloads) and offer a fully offline pre-fetched install mode for operators who can pre-populate a wheel cache.
 - Dependency pinning, an immutable reference image digest, and a per-result environment manifest (OS, arch, Python patch, installed versions).
 - Full result-integrity metadata (benchmark SHA, task/prompt/runner hashes, model response hash, log hashes, exit codes, token/latency) and a `results verify` command.
 - Optional adjacent-regression scoring: run the tests nearest the modified module and report, without necessarily gating on the full suite.

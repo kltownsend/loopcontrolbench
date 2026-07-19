@@ -15,7 +15,7 @@ Env: optional BENCH_IMAGE. Usage: gate_sandboxed.py <path/to/task.json>
 import subprocess, sys, tempfile, os, json, shutil
 sys.path.insert(0, os.path.dirname(__file__))
 from run import _parse
-from run_sandboxed import IMAGE, WORKROOT, LIMITS, INSTALL, _run, _docker
+from run_sandboxed import IMAGE, WORKROOT, LIMITS, INSTALL, _run, _docker, install_in_sandbox
 
 def prepare_base(spec, work):
     """Host-side git only: clone, checkout buggy base, overlay the fix commit's tests."""
@@ -42,7 +42,7 @@ def gate(spec):
         rp = prepare_base(spec, work)
         if rp is None:
             log['drop'] = 'checkout_failed'; return log
-        if '__INSTALL_OK__' not in _docker(work, INSTALL, network='bridge', timeout=1200).stdout:
+        if '__INSTALL_OK__' not in install_in_sandbox(work).stdout:
             log['drop'] = 'install_failed'; return log
         buggy = _pytest(work, spec)                                   # base: tests must fail
         srcs = [f for f in spec['source_files'] if f.endswith('.py')]

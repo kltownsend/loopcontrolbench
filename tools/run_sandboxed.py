@@ -3,17 +3,24 @@
 
 The untrusted steps — installing the repo (runs its setup.py) and running its tests —
 happen inside a disposable container that gets NO host environment, so it never sees the
-API key or any credential, and runs tests with the network turned off. The host does only
-git and file operations (low risk) and the model call (which needs the key). The container
-and the untrusted code never share an environment with the key.
+API key or any credential. The host does only git and file operations (low risk) and the
+model call (which needs the key). The container and the untrusted code never share an
+environment with the key.
 
-Isolation per task: fresh container, --network none during tests, no docker socket,
-no host mounts except the per-task work dir, memory/cpu/pid limits, --rm teardown.
+Egress is locked down in both untrusted phases. Tests run with --network none. Install runs
+on an --internal Docker network with no route out; its ONLY egress is a small allowlist proxy
+(package hosts only, and it refuses any host resolving to a private/link-local IP). So a
+malicious build backend or dependency hook cannot reach the cloud metadata endpoint, internal
+services, or arbitrary hosts, even if it ignores the proxy env: with no other route, the
+packets have nowhere to go. The proxy runs from the trusted base image, never from a repo.
+
+Isolation per task: fresh container, allowlist-proxied install then --network none tests, no
+docker socket, no host mounts except the per-task work dir, memory/cpu/pid limits, --rm teardown.
 
 Env: MODEL, OPENAI_API_KEY, optional OPENAI_BASE_URL, optional BENCH_IMAGE.
-Usage: run_sandboxed.py <path/to/task.json>
+Usage: run_sandboxed.py <path/to/task.json>   |   run_sandboxed.py --teardown
 """
-import subprocess, sys, tempfile, os, json, shutil
+import subprocess, sys, tempfile, os, json, shutil, time
 sys.path.insert(0, os.path.dirname(__file__))
 from run import build_prompt, call_model, parse_edits, _parse  # host-side, no subprocess
 
@@ -21,6 +28,18 @@ IMAGE = os.environ.get('BENCH_IMAGE', 'loopcontrolbench-base')  # build: docker 
 # work dir must be under a Docker-shared path; ~ is shared on Docker Desktop for macOS.
 WORKROOT = os.path.expanduser('~/.lcb_work')
 LIMITS = ['--memory=2g', '--cpus=2', '--pids-limit=512', '--security-opt=no-new-privileges']
+
+# Egress control for the install phase: an internal (no-route-out) network for the untrusted
+# install container, plus a proxy that straddles it and an egress network and only tunnels to
+# package hosts. The proxy is the sole path out, so blocking is not opt-in on the repo's code.
+EGRESS_NET = 'lcb-egress'
+INTERNAL_NET = 'lcb-internal'
+PROXY_NAME = 'lcb-proxy'
+PROXY_PORT = '8899'
+PROXY_ALLOW = os.environ.get('BENCH_PROXY_ALLOW', 'pypi.org,files.pythonhosted.org,pythonhosted.org')
+_PROXY_URL = 'http://%s:%s' % (PROXY_NAME, PROXY_PORT)
+PROXY_ENV = [a for k in ('HTTPS_PROXY', 'https_proxy', 'HTTP_PROXY', 'http_proxy')
+             for a in ('-e', '%s=%s' % (k, _PROXY_URL))]
 
 INSTALL = (
     'python -m venv /work/venv && '
@@ -34,11 +53,69 @@ INSTALL = (
 def _run(cmd, timeout=1200):
     return subprocess.run(cmd, capture_output=True, text=True, timeout=timeout)
 
-def _docker(work, bash_cmd, network, timeout):
-    # No -e / --env-file: the container inherits none of the host environment.
+def _docker(work, bash_cmd, network, timeout, env_extra=None):
+    # No -e / --env-file beyond env_extra: the container inherits none of the host environment.
+    # env_extra carries only the proxy address for the install phase (not a credential).
     return _run(['docker', 'run', '--rm', '--network', network, '--pull', 'never',
+                 *(env_extra or []),
                  '-v', work + ':/work', '-w', '/work/repo', *LIMITS, IMAGE, 'bash', '-lc', bash_cmd],
                 timeout=timeout)
+
+def _net_exists(name):
+    return subprocess.run(['docker', 'network', 'inspect', name],
+                          capture_output=True).returncode == 0
+
+def _proxy_running():
+    r = subprocess.run(['docker', 'inspect', '-f', '{{.State.Running}}', PROXY_NAME],
+                       capture_output=True, text=True)
+    return r.returncode == 0 and r.stdout.strip() == 'true'
+
+def _ready():
+    return _proxy_running() and _net_exists(INTERNAL_NET) and _net_exists(EGRESS_NET)
+
+def ensure_proxy():
+    """Idempotently create the two networks and start the allowlist proxy. Reused across tasks.
+    A lockdir serializes setup so parallel tasks (bench.sh runs 6 at once) don't race."""
+    os.makedirs(WORKROOT, exist_ok=True)
+    if _ready():
+        return
+    lock = os.path.join(WORKROOT, '.proxy.lock')
+    for _ in range(90):                       # wait out whoever holds the lock, then re-check
+        try:
+            os.mkdir(lock); break
+        except FileExistsError:
+            if _ready(): return
+            time.sleep(1)
+    else:
+        return                                # best effort; proceed even if we never got the lock
+    try:
+        if _ready():
+            return
+        if not _net_exists(EGRESS_NET):
+            _run(['docker', 'network', 'create', EGRESS_NET])
+        if not _net_exists(INTERNAL_NET):
+            _run(['docker', 'network', 'create', '--internal', INTERNAL_NET])
+        if not _proxy_running():
+            subprocess.run(['docker', 'rm', '-f', PROXY_NAME], capture_output=True)  # clear stale
+            _run(['docker', 'run', '-d', '--name', PROXY_NAME, '--network', INTERNAL_NET,
+                  *LIMITS, IMAGE, 'python', '/allowlist_proxy.py', PROXY_PORT, PROXY_ALLOW])
+            _run(['docker', 'network', 'connect', EGRESS_NET, PROXY_NAME])  # give the proxy egress
+            time.sleep(2)                     # let it bind before the first install connects
+    finally:
+        try:
+            os.rmdir(lock)
+        except OSError:
+            pass
+
+def install_in_sandbox(work, timeout=1200):
+    """Run the untrusted install on the no-egress network, reachable out only via the proxy."""
+    ensure_proxy()
+    return _docker(work, INSTALL, network=INTERNAL_NET, timeout=timeout, env_extra=PROXY_ENV)
+
+def teardown_proxy():
+    subprocess.run(['docker', 'rm', '-f', PROXY_NAME], capture_output=True)
+    for n in (INTERNAL_NET, EGRESS_NET):
+        subprocess.run(['docker', 'network', 'rm', n], capture_output=True)
 
 def prepare_host(spec, work):
     rp = os.path.join(work, 'repo')
@@ -56,7 +133,7 @@ def run_task(spec):
     log = {'task_id': spec['task_id'], 'model': os.environ.get('MODEL', 'gpt-5-mini'), 'sandboxed': True}
     try:
         rp = prepare_host(spec, work)
-        inst = _docker(work, INSTALL, network='bridge', timeout=1200)   # pip needs network
+        inst = install_in_sandbox(work)                                 # pip, egress via allowlist proxy
         if '__INSTALL_OK__' not in inst.stdout:
             log['drop'] = 'install_failed'; return log
         prompt = build_prompt(spec, rp)                                 # host reads source
@@ -86,4 +163,10 @@ def run_task(spec):
         shutil.rmtree(work, ignore_errors=True)
 
 if __name__ == '__main__':
-    print(json.dumps(run_task(json.load(open(sys.argv[1]))), indent=1))
+    arg = sys.argv[1] if len(sys.argv) > 1 else ''
+    if arg == '--teardown':
+        teardown_proxy(); print('proxy and networks removed')
+    elif arg == '--setup':
+        ensure_proxy(); print('proxy ready' if _ready() else 'proxy setup incomplete')
+    else:
+        print(json.dumps(run_task(json.load(open(arg))), indent=1))
