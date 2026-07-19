@@ -24,6 +24,8 @@ Egress is locked down in both untrusted phases. Tests run with `--network none`.
 
 The scoring logic also exists as `tools/run.py` for local development, which runs a single task **unsandboxed** — do not point it at untrusted repositories outside a VM.
 
+**The task spec is trusted input; the cloned repository is not.** The sandbox isolates the third-party repository's build and test code. It does **not** sandbox the task spec itself: `source_files` and `test_files` are read and executed by the host-side runner (file reads, and the pytest invocation), so a task spec is executable configuration. In this project's operating model that boundary is safe because the pool is mined and certified by the owner (see [Growing the pool](#growing-the-pool)), so the published reference is not exposed to this. But if you author your own tasks, treat specs accordingly: **do not run task specs from untrusted sources, and review any spec an agent generated or that you copied from a fork before running it.** Centralized path containment and shell-safe argument handling for spec paths are on the [roadmap](#roadmap) as defense in depth.
+
 ## The reference number
 
 `gpt-5-mini`, one attempt per task, no escalation, no repair loop:
@@ -161,17 +163,17 @@ The task specs contain `fix_sha`, and the fixes are public PRs. **The answer is 
 
 ## Growing the pool
 
-`tools/mine.py owner/repo <limit>` mines recent merged bug-fix PRs and admits the ones that reproduce. The gate makes *admission* mechanical, so contributions cannot bypass the fail-to-pass fidelity gate. It does not, by itself, protect *corpus quality* — representativeness and adversarial selection are governed, not automatic.
+**The task pool is curated and maintained by the project owner. Task specs are not accepted as direct submissions.** Issues suggesting repositories or candidate PRs are welcome, but the task itself is then mined, reproduced, and certified here through the gate, so no outside-authored spec enters the pool. That keeps the trust boundary clean: a task spec is part of the trusted benchmark definition, not community-controlled input (see [the task-spec trust note](#-security-this-runs-untrusted-code)).
 
-Contributions welcome under these rules:
+`tools/mine.py owner/repo <limit>` mines recent merged bug-fix PRs and admits the ones that reproduce in the scoring image. The gate makes *admission* mechanical, so a candidate cannot bypass the fail-to-pass fidelity check. It does not, by itself, protect *corpus quality* — representativeness and adversarial selection are governed, not automatic. The curation criteria the gate cannot enforce on its own:
 
 - one task per genuine bug; deduplicate against existing patterns
 - reasonable repository and task size (no denial-of-service repos)
-- source project must carry a recognized open-source license
-- disclose any task drawn from a repository you author or maintain
-- no benchmark-targeted commits; task selection must happen before the task is evaluated against any model whose score will be reported, and contributors must disclose any prior model runs
+- source project carries a recognized open-source license
+- disclose any task drawn from a repository the owner authors or maintains
+- no benchmark-targeted commits; selection happens before the task is scored against any model whose number will be reported
 - a cap per source repository, to avoid concentration
-- include provenance (repo, PR, commits) in the spec
+- provenance (repo, PR, commits) in every spec
 
 ## Independence and disclosure
 
@@ -187,6 +189,7 @@ Per-task container isolation (no host env, restricted mounts, no Docker socket, 
 
 - Tighten the install allowlist further (per-run pinned index, hash-checked downloads) and offer a fully offline pre-fetched install mode for operators who can pre-populate a wheel cache.
 - Read-only container root filesystem with explicit writable tmpfs mounts for the build/test paths that need them, tested across the pool's repositories so it does not silently break legitimate test suites.
+- Defense in depth for user-authored task specs: centralized validation that `source_files` and `test_files` are relative paths contained within the repository checkout, and shell-safe argument handling (pass test paths as argv rather than composing the pytest command from raw spec strings). Not required for the published pool, which is owner-certified, but a safeguard for anyone building their own tasks.
 - Dependency pinning, an immutable reference image digest, and a per-result environment manifest (OS, arch, Python patch, installed versions).
 - Full result-integrity metadata (benchmark SHA, task/prompt/runner hashes, model response hash, log hashes, exit codes, token/latency) and a `results verify` command.
 - Optional adjacent-regression scoring: run the tests nearest the modified module and report, without necessarily gating on the full suite.
