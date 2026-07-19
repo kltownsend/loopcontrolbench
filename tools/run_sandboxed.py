@@ -27,7 +27,8 @@ from run import build_prompt, call_model, parse_edits, _parse  # host-side, no s
 IMAGE = os.environ.get('BENCH_IMAGE', 'loopcontrolbench-base')  # build: docker build -t loopcontrolbench-base tools/
 # work dir must be under a Docker-shared path; ~ is shared on Docker Desktop for macOS.
 WORKROOT = os.path.expanduser('~/.lcb_work')
-LIMITS = ['--memory=2g', '--cpus=2', '--pids-limit=512', '--security-opt=no-new-privileges']
+LIMITS = ['--memory=2g', '--cpus=2', '--pids-limit=512', '--security-opt=no-new-privileges',
+          '--cap-drop=ALL']  # pip/pytest need no Linux capabilities; drop them all
 
 # Egress control for the install phase: an internal (no-route-out) network for the untrusted
 # install container, plus a proxy that straddles it and an egress network and only tunnels to
@@ -41,13 +42,19 @@ _PROXY_URL = 'http://%s:%s' % (PROXY_NAME, PROXY_PORT)
 PROXY_ENV = [a for k in ('HTTPS_PROXY', 'https_proxy', 'HTTP_PROXY', 'http_proxy')
              for a in ('-e', '%s=%s' % (k, _PROXY_URL))]
 
+# Fail closed: the required steps (venv, base install, explicit requirements files, pytest) abort
+# the whole script on failure via `set -e`, so a failed install never reaches __INSTALL_OK__ and
+# the caller (which checks BOTH the exit code and the marker) drops the task as install_failed
+# instead of letting a broken environment be scored as a model miss. Optional extras stay
+# best-effort (|| true): a project may legitimately lack a [test] extra.
 INSTALL = (
-    'python -m venv /work/venv && '
-    '/work/venv/bin/pip install -q -e . 2>/dev/null; '
-    'for e in test tests dev testing all; do /work/venv/bin/pip install -q -e ".[$e]" 2>/dev/null; done; '
+    'set -e; '
+    'python -m venv /work/venv; '
+    '/work/venv/bin/pip install -q -e .; '
+    'for e in test tests dev testing all; do /work/venv/bin/pip install -q -e ".[$e]" 2>/dev/null || true; done; '
     'for r in requirements*dev*.txt requirements*test*.txt test-requirements.txt dev-requirements.txt; do '
-    '[ -f "$r" ] && /work/venv/bin/pip install -q -r "$r" 2>/dev/null; done; '
-    '/work/venv/bin/pip install -q pytest 2>/dev/null; echo __INSTALL_OK__'
+    'if [ -f "$r" ]; then /work/venv/bin/pip install -q -r "$r"; fi; done; '
+    '/work/venv/bin/pip install -q pytest; echo __INSTALL_OK__'
 )
 
 def _run(cmd, timeout=1200):
@@ -134,8 +141,12 @@ def run_task(spec):
     try:
         rp = prepare_host(spec, work)
         inst = install_in_sandbox(work)                                 # pip, egress via allowlist proxy
-        if '__INSTALL_OK__' not in inst.stdout:
-            log['drop'] = 'install_failed'; return log
+        # Check BOTH the exit code and the marker: with `set -e` a failed required step aborts
+        # before the marker prints and the container exits non-zero, so a broken environment is
+        # dropped here, never scored downstream as a model miss.
+        if inst.returncode != 0 or '__INSTALL_OK__' not in inst.stdout:
+            log.update({'drop': 'install_failed', 'install_returncode': inst.returncode,
+                        'outcome': 'infrastructure_error'}); return log
         prompt = build_prompt(spec, rp)                                 # host reads source
         out = call_model(prompt)                                        # host holds the key
         allowed = set(spec['source_files']); applied, failed, oos = [], [], []
@@ -156,8 +167,17 @@ def run_task(spec):
         # silent exclusion. The only legitimate run-time infra exclusion is
         # install_failed, handled above.
         still = [t for t in spec['fail_to_pass'] if res.get(t) != 'PASSED']
-        log.update({'solved': not still, 'edits_applied': len(applied), 'edits_failed': len(failed),
-                    'out_of_scope': oos, 'still_failing': still, 'completion_chars': len(out)})
+        solved = not still
+        # One explicit outcome per task, so aggregation is not left to interpret the counts.
+        if solved:
+            outcome = 'solved'
+        elif applied:
+            outcome = 'model_miss'                                      # applied an edit, tests still fail
+        else:
+            outcome = 'invalid_edit'                                    # no applicable edit: empty, unparseable, unmatched, or out-of-scope
+        log.update({'solved': solved, 'outcome': outcome, 'edits_applied': len(applied),
+                    'edits_failed': len(failed), 'out_of_scope': oos, 'still_failing': still,
+                    'completion_chars': len(out)})
         return log
     finally:
         shutil.rmtree(work, ignore_errors=True)

@@ -42,7 +42,8 @@ def gate(spec):
         rp = prepare_base(spec, work)
         if rp is None:
             log['drop'] = 'checkout_failed'; return log
-        if '__INSTALL_OK__' not in install_in_sandbox(work).stdout:
+        inst = install_in_sandbox(work)
+        if inst.returncode != 0 or '__INSTALL_OK__' not in inst.stdout:
             log['drop'] = 'install_failed'; return log
         buggy = _pytest(work, spec)                                   # base: tests must fail
         srcs = [f for f in spec['source_files'] if f.endswith('.py')]
