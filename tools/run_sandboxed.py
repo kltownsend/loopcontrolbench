@@ -117,6 +117,12 @@ def ensure_proxy():
 def install_in_sandbox(work, timeout=1200):
     """Run the untrusted install on the no-egress network, reachable out only via the proxy."""
     ensure_proxy()
+    # The container runs with --cap-drop=ALL, so it has no CAP_DAC_OVERRIDE. On native Linux
+    # Docker the bind mount keeps the host user's ownership, so the container's root cannot write
+    # into it (venv creation, editable install) unless the dir is world-writable. Make the
+    # per-task work dir writable so those succeed. (Docker Desktop maps ownership so this is a
+    # no-op there, but it is required for the bench to run on Linux.)
+    subprocess.run(['chmod', '-R', 'a+rwX', work])
     return _docker(work, INSTALL, network=INTERNAL_NET, timeout=timeout, env_extra=PROXY_ENV)
 
 def teardown_proxy():
