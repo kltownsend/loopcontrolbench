@@ -127,6 +127,38 @@ MODEL=my-model OPENAI_BASE_URL=http://host:8000/v1 OPENAI_API_KEY=x \
   VLLM_THINK=1 NUM_PREDICT=16384 PAR=8 TASK_TIMEOUT=1800 ./tools/bench.sh
 ```
 
+## Beyond a single attempt: repair loops, resampling, external workers
+
+`bench.sh` scores one attempt per task. Three tools score the harder questions, each over a single task, each using the same sandboxed gate.
+
+**Repair loop** (`tools/stateful.py`) — a stateful repair loop. The worker emits an edit, the gate runs the tests and hands back the failure, and the conversation iterates, so the worker refines instead of restarting. Reasoning env is the same as above (`MODEL`, `VLLM_THINK`/`OLLAMA_THINK`, `NUM_PREDICT`). Extra knobs:
+
+| env | effect |
+|---|---|
+| `TURNS` | max attempts (default 4) |
+| `CONTROL_MODEL` | optional frontier **controller** (`gpt-*`/`o*` or `claude-*`) that reads each failed attempt and returns guidance, never the fix. Needs `CONTROL_KEY`. |
+| `CONTROL_STATEFUL=1` | hand the controller the full trajectory (all prior attempts and guidance) instead of only the current turn |
+
+It records `outcome`, `first_solved_turn`, `control_tokens`, and `worker_tokens` (the last is ~0 for a local endpoint that reports no usage). One task:
+
+```bash
+MODEL=my-model OPENAI_BASE_URL=http://host:8000/v1 OPENAI_API_KEY=x VLLM_THINK=1 NUM_PREDICT=49152 \
+  TURNS=4 python tools/stateful.py tasks/<task>.json
+```
+
+**Resample** (`tools/resample.py`) — best-of-N free draws, no feedback (pass@N). `DRAWS` sets N (default 4). This is the floor a feedback loop has to beat.
+
+```bash
+MODEL=my-model DRAWS=5 python tools/resample.py tasks/<task>.json
+```
+
+**Bring your own worker** (`tools/cval.py`) — score any external agent or model against the gate, no worker code required. `--prompt` prints the exact task text; pipe your edit (the same reason-then-fenced `SEARCH`/`REPLACE` format the runner expects) on stdin and it returns the verdict. It keeps a persistent per-task sandbox under `~/.lcb_cval` so repeated attempts skip reinstall. Run it from the repo root.
+
+```bash
+python tools/cval.py <task_id> --prompt          # get the task text
+python tools/cval.py <task_id> < my_edit.txt     # -> RESULT: SOLVED | FAILED | NO_EDIT_APPLIED
+```
+
 ## Outcomes and the denominator
 
 Each attempted task resolves to exactly one outcome, recorded explicitly in the result record's `outcome` field (`solved | model_miss | invalid_edit | model_timeout | infrastructure_error`) so aggregation and auditing do not have to infer it from the counts:
